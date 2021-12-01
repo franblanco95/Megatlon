@@ -1,11 +1,10 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { HomeScreen } from '../screens/HomeScreen';
-import { DetailScreen } from '../screens/DetailScreen';
 import { Button } from 'react-native';
 import { MegatlonLogo } from '../components/MegatlonLogo';
+import { ProfileScreen } from '../screens/Profile/ProfileScreen';
 
-export const MainNavigator = () => {
+export const ProfileNavigator = () => {
 
     const Stack = createNativeStackNavigator();
 
@@ -17,9 +16,10 @@ export const MainNavigator = () => {
                 headerTitleStyle: { fontWeight: 'bold' },
                 headerTitleAlign: 'center',
             }}>
+
             <Stack.Screen
                 name="Home"
-                component={HomeScreen}
+                component={ProfileScreen}
                 options={{
                     headerTitle: (props) => <MegatlonLogo {...props} />,
                     headerRight: () => (
@@ -29,13 +29,6 @@ export const MainNavigator = () => {
                             color="red"
                         />
                     ),
-
-                }}
-            />
-            <Stack.Screen
-                name="Detail"
-                component={DetailScreen}
-                options={{
 
                 }}
             />

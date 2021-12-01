@@ -1,7 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { MainNavigator } from './MainNavigator';
-import { View } from 'react-native';
+import { HomeNavigator } from './HomeNavigator';
+import { ReservasNavigator } from './ReservasNavigator';
+import { ProfileNavigator } from './ProfileNavigator';
+import { View, StyleSheet } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
@@ -13,10 +15,13 @@ export const TabNavigator = () => {
         <Tab.Navigator
             screenOptions={{
                 headerShown: false,
+                tabBarStyle: { ...styles.tabBar },
+                tabBarActiveTintColor: "#ed9645",
+
             }}>
             <Tab.Screen
                 name="Inicio"
-                component={MainNavigator}
+                component={HomeNavigator}
                 options={{
                     tabBarBadge: '1',
                     tabBarIcon: (props) => (
@@ -28,7 +33,7 @@ export const TabNavigator = () => {
 
             <Tab.Screen
                 name="Reservas"
-                component={MainNavigator}
+                component={ReservasNavigator}
                 options={{
                     tabBarIcon: (props) => (
                         <View>
@@ -39,7 +44,7 @@ export const TabNavigator = () => {
 
             <Tab.Screen
                 name="Perfil"
-                component={MainNavigator}
+                component={ProfileNavigator}
                 options={{
                     tabBarIcon: (props) => (
                         <View>
@@ -49,3 +54,14 @@ export const TabNavigator = () => {
         </Tab.Navigator>
     )
 }
+
+const styles = StyleSheet.create({
+    tabBar: {
+        backgroundColor: '#161819',
+        position: 'absolute',
+        borderTopStartRadius: 15,
+        borderTopEndRadius: 15,
+        height: 80,
+    },
+
+})
