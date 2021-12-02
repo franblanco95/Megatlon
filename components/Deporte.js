@@ -1,13 +1,12 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Button } from 'react-native'
 
-export const Deporte = ({ deporte }) => {
+export const Deporte = ({ deporte, onSelected }) => {
     return (
         <TouchableOpacity
-            onSelected={() => navigation.navigate('Detail')}
+            onPress={() => onSelected(deporte)}
             style={styles.container}
         >
-
             <Text style={styles.text}>{deporte.name}</Text>
         </TouchableOpacity>
     )

@@ -1,11 +1,13 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { HomeNavigator } from './HomeNavigator';
+import { ShopNavigator } from './ShopNavigator';
 import { ReservasNavigator } from './ReservasNavigator';
 import { ProfileNavigator } from './ProfileNavigator';
 import { View, StyleSheet } from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import colors from '../constants/colors'
 
 export const TabNavigator = () => {
 
@@ -16,7 +18,7 @@ export const TabNavigator = () => {
             screenOptions={{
                 headerShown: false,
                 tabBarStyle: { ...styles.tabBar },
-                tabBarActiveTintColor: "#ed9645",
+                tabBarActiveTintColor: colors.secondary,
 
             }}>
             <Tab.Screen
@@ -26,7 +28,7 @@ export const TabNavigator = () => {
                     tabBarBadge: '1',
                     tabBarIcon: (props) => (
                         <View>
-                            <MaterialCommunityIcons name="home" size={30} color={props.color} />
+                            <MaterialCommunityIcons name="home" size={27} color={props.color} />
 
                         </View>)
                 }} />
@@ -37,7 +39,18 @@ export const TabNavigator = () => {
                 options={{
                     tabBarIcon: (props) => (
                         <View>
-                            <FeatherIcon name="calendar" size={30} color={props.color} />
+                            <FeatherIcon name="calendar" size={27} color={props.color} />
+                        </View>)
+                }}
+            />
+
+            <Tab.Screen
+                name="Tienda"
+                component={ShopNavigator}
+                options={{
+                    tabBarIcon: (props) => (
+                        <View>
+                            <MaterialCommunityIcons name="cart" size={27} color={props.color} />
                         </View>)
                 }}
             />
@@ -48,7 +61,7 @@ export const TabNavigator = () => {
                 options={{
                     tabBarIcon: (props) => (
                         <View>
-                            <FeatherIcon name="user" size={30} color={props.color} />
+                            <MaterialCommunityIcons name="account" size={30} color={props.color} />
                         </View>)
                 }} />
         </Tab.Navigator>
@@ -57,11 +70,13 @@ export const TabNavigator = () => {
 
 const styles = StyleSheet.create({
     tabBar: {
-        backgroundColor: '#161819',
-        position: 'absolute',
-        borderTopStartRadius: 15,
-        borderTopEndRadius: 15,
-        height: 80,
+        backgroundColor: colors.primary,
+        // position: 'absolute',
+        borderTopWidth: 0,
+        borderTopStartRadius: 25,
+        borderTopEndRadius: 25,
+        height: 90,
+
     },
 
 })

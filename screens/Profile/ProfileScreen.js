@@ -1,18 +1,47 @@
 import React from 'react'
-import { Text, ScrollView, Linking, StyleSheet } from 'react-native'
-import { Avatar, SocialIcon, Button } from 'react-native-elements'
+import { Text, TouchableOpacity, ScrollView, Linking, StyleSheet } from 'react-native'
+import { Avatar, SocialIcon, Button, Divider } from 'react-native-elements'
 
 export const ProfileScreen = () => {
+
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <Avatar
-                rounded
-                size="large"
-                containerStyle={styles.avatar}
-                source={require('../../assets/default-avatar.jpg')}
-            />
-            <Text>Hola Francisco Blanco</Text>
 
+            <Avatar
+                size={100}
+                rounded
+                icon={{ name: 'user', type: 'font-awesome' }}
+                onPress={() => console.log("Works!")}
+                activeOpacity={0.7}
+                containerStyle={styles.avatar}
+            />
+
+
+            <Text>Francisco Blanco</Text>
+
+            <Divider orientation="vertical" color="red" />
+
+
+
+            <Button
+                type="solid"
+                // disabled
+                icon={{
+                    name: "person",
+                    size: 25,
+                    color: "white"
+                }}
+                title="Información Personal" />
+                
+            <Button
+                type="solid"
+                // disabled
+                icon={{
+                    name: "person",
+                    size: 25,
+                    color: "white"
+                }}
+                title="Información Personal" />
 
             <SocialIcon
                 type='whatsapp'
@@ -44,14 +73,18 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'center',
-
+        backgroundColor: '#222323',
     },
     avatar: {
-        width: 90,
-        height: 90,
-        marginVertical: 15,
+        backgroundColor: 'gray',
     },
     icon: {
         backgroundColor: 'black',
+    },
+    button: {
+        backgroundColor: 'white',
+        padding: 15,
+        width: '80%',
+        borderRadius: 5,
     }
 })
