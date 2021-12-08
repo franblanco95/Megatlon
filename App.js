@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { TabNavigator } from './navigation/TabNavigator';
 import { Provider } from 'react-redux';
 import store from './store/store'
+import LoginNavigator from './navigation/LoginNavigator';
 
 export default function App() {
   return (
@@ -15,7 +16,8 @@ export default function App() {
           barStyle="light-content"
         />
 
-        <TabNavigator />
+        {/* <TabNavigator /> */}
+        <LoginNavigator />
       </NavigationContainer>
     </Provider>
   );
