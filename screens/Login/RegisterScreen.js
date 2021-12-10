@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TouchableOpacity } from 'react-native'
 import { KeyboardAvoidingView, TextInput } from 'react-native'
 import { StyleSheet, Text, View } from 'react-native'
 import { useDispatch } from 'react-redux'
 import colors from '../../constants/colors'
+import { auth, db } from '../../firebase'
 import { signup } from '../../store/actions/auth.actions'
 
-const RegisterScreen = () => {
+const RegisterScreen = ({ navigation }) => {
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged(user => {
+            if (user)
+                navigation.navigate("prueba")
+        })
+        return unsubscribe
+    }, [])
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
@@ -17,6 +26,12 @@ const RegisterScreen = () => {
     const handleSingUp = () => {
         dispatch(signup(email, password))
     }
+
+    const handleLogIn = () => {
+        dispatch(signup(email, password))
+    }
+
+
     return (
         <KeyboardAvoidingView
             style={styles.container}
@@ -40,7 +55,7 @@ const RegisterScreen = () => {
             </View>
             <View style={styles.buttonContainer}>
                 <TouchableOpacity
-                    onPress={() => { }}
+                    onPress={handleLogIn}
                     style={styles.button}
                 >
                     <Text style={styles.buttonText}>Login</Text>

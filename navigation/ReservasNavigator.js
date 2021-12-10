@@ -12,7 +12,9 @@ export const ReservasNavigator = () => {
     return (
         <Stack.Navigator
             screenOptions={{
-                headerStyle: { backgroundColor: '#161819' },
+                headerStyle: {
+                    backgroundColor: '#161819',
+                },
                 headerTintColor: 'white',
                 headerTitleStyle: { fontWeight: 'bold' },
                 headerTitleAlign: 'center',

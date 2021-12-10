@@ -1,36 +1,55 @@
-import { URL_AUTH_API } from "../../constants/database";
+import { auth } from "../../firebase";
 
 export const SIGNUP = 'SIGNUP';
+export const LOGIN = 'SIGNUP';
+export const SIGNOUT = 'SIGNOUT';
 
 export const signup = (email, password) => {
     return async dispatch => {
-        const response = await fetch(URL_AUTH_API, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password,
-                returnSecureToken: true,
-            }),
-        });
-        if (!response.ok) {
-            const errorResponse = await response.json();
-            const errorID = errorResponse.error.message;
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Registered with:', user)
+                dispatch({
+                    type: SIGNUP,
+                    token: user.idToken,
+                    userId: user.localId,
+                });
+            })
+            .catch(error => alert(error.message))
+    }
+}
 
-            let message = 'No se ha podido registrar';
-            if (errorID === 'EMAIL_EXISTS') message = 'Este email ya está registrado';
 
-            throw new error(message);
-        }
+export const login = (email, password) => {
+    return async dispatch => {
+        auth
+            .signInWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user;
+                console.log('Logged in with:', user.email)
+                dispatch({
+                    type: LOGIN,
+                    token: user.IdToken,
+                    userId: user.localId,
+                })
+            })
+            .catch(error => alert(error.message))
+    }
+}
 
-        const data = await response.json();
+export const signout = () => {
+    return async dispatch => {
+        auth
+            .signOut()
+            .then(() => {
+                dispatch({
+                    type: SIGNOUT,
 
-        dispatch({
-            type: SIGNUP,
-            token: data.idToken,
-            userId: data.localId,
-        });
+                })
+
+            })
+            .catch(error => alert(error.message))
     }
 }

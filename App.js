@@ -6,6 +6,10 @@ import { Provider } from 'react-redux';
 import store from './store/store'
 import LoginNavigator from './navigation/LoginNavigator';
 
+if (__DEV__) {
+  import('./reactotron').then(() => console.log('Reactotron Configured'))
+}
+
 export default function App() {
   return (
     <Provider store={store}>
@@ -16,8 +20,8 @@ export default function App() {
           barStyle="light-content"
         />
 
-        {/* <TabNavigator /> */}
-        <LoginNavigator />
+        <TabNavigator />
+        {/* <LoginNavigator /> */}
       </NavigationContainer>
     </Provider>
   );

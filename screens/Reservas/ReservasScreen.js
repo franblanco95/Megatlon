@@ -27,7 +27,7 @@ export const ReservasScreen = ({ navigation }) => {
                 showsVerticalScrollIndicator={false}>
 
                 <View style={styles.sede}>
-                    <Text style={styles.text}>Tu Sede es:</Text>
+                    {/* <Text style={styles.text}>Tu Sede es:</Text> */}
                     {/* <Picker
                     selectedValue={selectedValue}
                     style={{ height: 50, width: 150 }}
@@ -53,8 +53,7 @@ export const ReservasScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // alignItems: 'center',
-        backgroundColor: colors.background,
+        backgroundColor: colors.primary,
     },
     sede: {
         width: '100%',
