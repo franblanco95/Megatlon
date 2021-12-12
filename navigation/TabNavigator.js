@@ -18,9 +18,8 @@ export const TabNavigator = () => {
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
-                tabBarStyle: { ...styles.tabBar },
+                tabBarStyle: styles.tabBar,
                 tabBarActiveTintColor: colors.secondary,
-
             }}>
             <Tab.Screen
                 name="Inicio"
@@ -76,10 +75,10 @@ const styles = StyleSheet.create({
     tabBar: {
         backgroundColor: colors.primary,
         // position: 'absolute',
-        borderTopWidth: 2,
-        // borderColor: 'black',
-        borderTopStartRadius: 25,
-        borderTopEndRadius: 25,
+        borderTopWidth: 0,
+        borderColor: 'red',
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
         height: 100,
 
     },

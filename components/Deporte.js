@@ -1,6 +1,6 @@
 import React from 'react'
 import { ImageBackground } from 'react-native'
-import { Text, Pressable, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { Text, Pressable, View, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import colors from '../constants/colors'
 
 export const Deporte = ({ deporte, onSelected }) => {
@@ -11,32 +11,31 @@ export const Deporte = ({ deporte, onSelected }) => {
         // >
         //     <Text style={styles.text}>{deporte.name}</Text>
         // </TouchableOpacity>
+        <ImageBackground
+            source={deporte.background}
+            style={styles.imageContainer}>
+            <Pressable
+                onPress={() => navigation.navigate("Covid")}
+            >
+                <Text style={styles.imageTitle}>{deporte.name}</Text>
+            </Pressable>
+            {/* {console.log(deporte)} */}
 
-        <>
-            <ImageBackground
-                source={deporte.background}
-                style={styles.container}>
-                <Pressable
-                    onPress={() => navigation.navigate("Covid")}
-                >
-                    <Text style={styles.imageTitle}>{deporte.name}</Text>
-                </Pressable>
-                {/* {console.log(deporte)} */}
+        </ImageBackground>
 
-            </ImageBackground>
-        </>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: 'orange',
-        margin: 5,
-        padding: 10,
+    imageContainer: {
+        resizeMode: 'cover',
+        borderRadius: 10,
+        overflow: 'hidden',
         height: 150,
-        width: 150,
+        marginTop: 10,
+        marginHorizontal: 20,
+        paddingHorizontal: 20,
         justifyContent: 'center',
-        borderRadius: 5,
     },
     imageTitle: {
         color: colors.white,

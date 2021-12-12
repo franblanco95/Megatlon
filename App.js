@@ -20,8 +20,8 @@ export default function App() {
           barStyle="light-content"
         />
 
-        <TabNavigator />
-        {/* <LoginNavigator /> */}
+        {/* <TabNavigator /> */}
+        <LoginNavigator />
       </NavigationContainer>
     </Provider>
   );

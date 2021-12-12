@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { KeyboardAvoidingView, TextInput } from 'react-native'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, ImageBackground, Dimensions } from 'react-native'
 import { useDispatch } from 'react-redux'
+import Input from '../../components/Input'
 import colors from '../../constants/colors'
 import { auth, db } from '../../firebase'
-import { signup } from '../../store/actions/auth.actions'
+import { login, signup } from '../../store/actions/auth.actions'
+
+const { width, height } = Dimensions.get('window')
 
 const RegisterScreen = ({ navigation }) => {
 
@@ -28,7 +29,7 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     const handleLogIn = () => {
-        dispatch(signup(email, password))
+        dispatch(login(email, password))
     }
 
 
@@ -37,39 +38,66 @@ const RegisterScreen = ({ navigation }) => {
             style={styles.container}
             behavior="padding"
         >
-            <View style={styles.inputContainer}>
-                <TextInput
-                    placeholder="Email"
-                    value={email}
-                    onChangeText={text => setEmail(text)}
-                    style={styles.input}
-                />
+            <ImageBackground
+                source={require('../../assets/megatlonbackground.jpg')}
+                style={{ width: width, height: height }}
+            >
+                <View style={styles.darkLayer}></View>
 
-                <TextInput
-                    placeholder="Password"
-                    value={password}
-                    onChangeText={text => setPassword(text)}
-                    style={styles.input}
-                    secureTextEntry
-                />
-            </View>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity
-                    onPress={handleLogIn}
-                    style={styles.button}
-                >
-                    <Text style={styles.buttonText}>Login</Text>
-                </TouchableOpacity>
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={require('../../assets/megatlonlogo-02.png')} />
+                </View>
 
-                <TouchableOpacity
-                    onPress={handleSingUp}
-                    style={[styles.button, styles.buttonOutline]}
-                >
-                    <Text style={styles.buttonOutlineText}>Register</Text>
-                </TouchableOpacity>
+                <View style={styles.titleContainer}>
+                    <Text style={{ ...styles.text, ...styles.title }}>Bienvenido!</Text>
+                    <Text style={styles.text}>Inicia Sesión para ingresar a MegatlonApp</Text>
+                </View>
 
-            </View>
-        </KeyboardAvoidingView>
+                <View style={styles.inputContainer}>
+
+                    <Input icon={require('../../assets/mail.png')} placeholder='Email address' />
+                    <Input icon={require('../../assets/lock.png')} placeholder='Password' secureTextEntry />
+                    {/* <TextInput
+                        placeholder="Email"
+                        value={email}
+                        onChangeText={text => setEmail(text)}
+                        style={styles.input}
+                    />
+
+                    <TextInput
+                        placeholder="Password"
+                        value={password}
+                        onChangeText={text => setPassword(text)}
+                        style={styles.input}
+                        secureTextEntry
+                    /> */}
+                </View>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity
+                        onPress={handleLogIn}
+                        style={styles.button}
+                    >
+                        <Text style={styles.buttonText}>Login</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        onPress={handleSingUp}
+                        style={[styles.button, styles.buttonOutline]}
+                    >
+                        <Text style={styles.buttonOutlineText}>Register</Text>
+                    </TouchableOpacity>
+
+                </View>
+                <View style={styles.footerContainer}>
+                    <TouchableOpacity>
+                        <Text style={styles.signupText}>New user? Sign up</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.termsText}>Al registrarse, indica que ha leído y aceptado los Términos de servicio del parche.</Text>
+                </View>
+
+            </ImageBackground>
+        </KeyboardAvoidingView >
     )
 }
 
@@ -78,13 +106,37 @@ export default RegisterScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+    },
+    darkLayer: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        left: 0,
+        right: 0,
+        backgroundColor: '#000000',
+        opacity: 0.4,
+    },
+    imageContainer: {
+        alignItems: 'center',
+        marginVertical: 20,
+    },
+    titleContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    text: {
+        color: colors.white,
+        fontSize: 14,
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    inputContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
-    inputContainer: {
-        width: '80%',
-    },
-
     input: {
         backgroundColor: 'white',
         paddingHorizontal: 15,
@@ -93,24 +145,18 @@ const styles = StyleSheet.create({
         marginTop: 5,
 
     },
-
     buttonContainer: {
-
-        width: '60%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 40,
-
     },
-
     button: {
-
         backgroundColor: colors.background,
-        width: '100%',
+        width: '80%',
         padding: 15,
         borderRadius: 10,
         alignItems: 'center',
-
     },
     buttonText: {
         color: colors.white,
@@ -123,14 +169,25 @@ const styles = StyleSheet.create({
         marginTop: 5,
         borderColor: colors.secondary,
         borderWidth: 2,
-
     },
 
     buttonOutlineText: {
         color: colors.black,
         fontWeight: '700',
         fontSize: 16,
-
     },
+    footerContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    signupText: {
+        color: colors.secondary,
+    },
+    termsText: {
+        width: '80%',
+        color: colors.white,
+        textAlign: 'center',
+        fontSize: 12,
+    }
 
 })
