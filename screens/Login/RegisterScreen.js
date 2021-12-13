@@ -13,7 +13,8 @@ const RegisterScreen = ({ navigation }) => {
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged(user => {
             if (user)
-                navigation.navigate("prueba")
+                // navigation.navigate("prueba")
+                console.log('Hay Usuario Conectado')
         })
         return unsubscribe
     }, [])
@@ -40,7 +41,7 @@ const RegisterScreen = ({ navigation }) => {
         >
             <ImageBackground
                 source={require('../../assets/megatlonbackground.jpg')}
-                style={{ width: width, height: height }}
+                style={{ width: width, height: height, justifyContent: 'space-evenly' }}
             >
                 <View style={styles.darkLayer}></View>
 
@@ -50,14 +51,18 @@ const RegisterScreen = ({ navigation }) => {
                 </View>
 
                 <View style={styles.titleContainer}>
-                    <Text style={{ ...styles.text, ...styles.title }}>Bienvenido!</Text>
-                    <Text style={styles.text}>Inicia Sesión para ingresar a MegatlonApp</Text>
+                    <Text style={{ ...styles.text, ...styles.title }}>Registro</Text>
+                    <Text style={styles.text}>Completa el fomulario para continuar</Text>
                 </View>
 
                 <View style={styles.inputContainer}>
 
-                    <Input icon={require('../../assets/mail.png')} placeholder='Email address' />
-                    <Input icon={require('../../assets/lock.png')} placeholder='Password' secureTextEntry />
+                    <Input icon={require('../../assets/lock.png')} placeholder='Nombre' />
+
+                    <Input icon={require('../../assets/mail.png')} placeholder='Email' />
+
+                    <Input icon={require('../../assets/lock.png')} placeholder='Contraseña' password />
+
                     {/* <TextInput
                         placeholder="Email"
                         value={email}
@@ -78,22 +83,23 @@ const RegisterScreen = ({ navigation }) => {
                         onPress={handleLogIn}
                         style={styles.button}
                     >
-                        <Text style={styles.buttonText}>Login</Text>
+                        <Text style={styles.buttonText}>Crear cuenta</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity
+                    {/* <TouchableOpacity
                         onPress={handleSingUp}
                         style={[styles.button, styles.buttonOutline]}
                     >
                         <Text style={styles.buttonOutlineText}>Register</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </View>
                 <View style={styles.footerContainer}>
-                    <TouchableOpacity>
-                        <Text style={styles.signupText}>New user? Sign up</Text>
+                    <Text style={styles.termsText}>¿Ya estas registrado?</Text>
+                    <TouchableOpacity
+                        onPress={() => { navigation.navigate('Login') }}>
+                        <Text style={styles.signupText}>Iniciar Sesión</Text>
                     </TouchableOpacity>
-                    <Text style={styles.termsText}>Al registrarse, indica que ha leído y aceptado los Términos de servicio del parche.</Text>
                 </View>
 
             </ImageBackground>
@@ -106,6 +112,7 @@ export default RegisterScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'space-between'
     },
     darkLayer: {
         position: 'absolute',
@@ -114,7 +121,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         backgroundColor: '#000000',
-        opacity: 0.4,
+        opacity: 0.5,
     },
     imageContainer: {
         alignItems: 'center',
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     titleContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+        marginBottom: 10,
     },
     text: {
         color: colors.white,
@@ -152,7 +160,7 @@ const styles = StyleSheet.create({
         marginTop: 40,
     },
     button: {
-        backgroundColor: colors.background,
+        backgroundColor: colors.secondary,
         width: '80%',
         padding: 15,
         borderRadius: 10,
@@ -179,15 +187,17 @@ const styles = StyleSheet.create({
     footerContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        marginTop: 50,
     },
     signupText: {
         color: colors.secondary,
+        fontWeight: 'bold',
+        paddingBottom: 20,
     },
     termsText: {
         width: '80%',
         color: colors.white,
         textAlign: 'center',
-        fontSize: 12,
     }
 
 })

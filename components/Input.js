@@ -1,20 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TextInput, View } from 'react-native'
 import colors from '../constants/colors'
 
 const Input = ({ placeholder, icon, password }) => {
 
+    const [state, setState] = useState({
+        email: '',
+        password: '',
+    })
+
+    // const { email, password } = state;
+
+    const handleChangeText = text => {
+
+    }
 
     return (
-        <View style={styles.container}>
+        <View style={styles.inputContainer}>
             <View style={styles.icon}>
                 <Image source={icon} />
             </View>
             <TextInput
                 style={styles.input}
                 placeholder={placeholder}
-                // value={1}
-                // onChangeText={() => console.log(asd)}
+                secureTextEntry={password}
+                onChangeText={handleChangeText}
+            // value={1}
+            // onChangeText={() => console.log(asd)}
             >
 
             </TextInput>
@@ -26,7 +38,7 @@ export default Input
 
 const styles = StyleSheet.create({
 
-    container: {
+    inputContainer: {
         width: '80%',
         backgroundColor: colors.white,
         borderRadius: 10,
@@ -37,15 +49,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     icon: {
-        paddingLeft: 20,
+        paddingHorizontal: 20,
     },
     input: {
         backgroundColor: colors.white,
         borderBottomColor: colors.white,
         color: '#727C8E',
         fontSize: 14,
-        paddingLeft: 15,
-
     },
 
 })
