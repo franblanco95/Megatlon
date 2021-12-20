@@ -60,8 +60,18 @@ export const ProfileScreen = () => {
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />
+                    <Text style={styles.pressableText}>Configuración</Text>
+                </Pressable>
+
+                <Pressable
+                    style={styles.pressableBContainer}
+                    onPress={() => console.log("Action!")}
+                >
+
+                    <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Cerrar Sesión</Text>
                 </Pressable>
+
 
 
             </View>

@@ -2,6 +2,7 @@ import React from 'react'
 import { ImageBackground } from 'react-native'
 import { Text, Pressable, View, StyleSheet, TouchableOpacity, Button } from 'react-native'
 import colors from '../constants/colors'
+import { LinearGradient } from 'expo-linear-gradient'
 
 export const Deporte = ({ deporte, onSelected }) => {
     return (
@@ -14,14 +15,34 @@ export const Deporte = ({ deporte, onSelected }) => {
         <ImageBackground
             source={deporte.background}
             style={styles.imageContainer}>
-            <Pressable
-                onPress={() => navigation.navigate("Covid")}
-            >
-                <Text style={styles.imageTitle}>{deporte.name}</Text>
-            </Pressable>
-            {/* {console.log(deporte)} */}
+            <LinearGradient
+                colors={['black', 'transparent']}
+                start={{ x: 0, y: 1 }}
+                end={{ x: 0.5, y: 0.8 }}
+                style={{
+                    height: 150,
+                    paddingHorizontal: 20,
+                    justifyContent: 'center',
 
-        </ImageBackground>
+                }}
+            >
+                <TouchableOpacity
+                    onPress={() => navigation.navigate("Covid")}
+                >
+                    <Text style={styles.imageTitle}>{deporte.name}</Text>
+                    <View style={{
+                        width: 145,
+                        borderRadius: 20,
+                        borderWidth: 1,
+                        borderColor: colors.white,
+                    }}>
+                        <Text style={styles.imageText}>RESERVAR UN TURNO</Text>
+                    </View>
+                </TouchableOpacity>
+                {/* {console.log(deporte)} */}
+            </LinearGradient >
+
+        </ImageBackground >
 
     )
 }
@@ -29,17 +50,23 @@ export const Deporte = ({ deporte, onSelected }) => {
 const styles = StyleSheet.create({
     imageContainer: {
         resizeMode: 'cover',
-        borderRadius: 10,
         overflow: 'hidden',
+        borderRadius: 10,
         height: 150,
         marginTop: 10,
         marginHorizontal: 20,
-        paddingHorizontal: 20,
-        justifyContent: 'center',
     },
     imageTitle: {
         color: colors.white,
         fontWeight: 'bold',
         fontSize: 20,
+        marginBottom: 5,
+    },
+    imageText: {
+        color: colors.white,
+        paddingHorizontal: 10,
+        paddingVertical: 8,
+        fontSize: 12,
+        fontWeight: 'bold'
     }
 })

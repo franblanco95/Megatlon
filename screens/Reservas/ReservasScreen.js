@@ -28,7 +28,7 @@ export const ReservasScreen = ({ navigation }) => {
 
                     {deportes.map((deportes => (
                         <View key={deportes.id}>
-                            <Deporte deporte={deportes} onSelected={handleSelectedItem} />
+                                <Deporte deporte={deportes} onSelected={handleSelectedItem} />
                         </View>)))
                     }
 
