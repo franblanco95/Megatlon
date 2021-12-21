@@ -11,10 +11,14 @@ export const signup = (email, password) => {
             .then(userCredentials => {
                 const user = userCredentials.user;
                 console.log('Registered with:', user)
+                console.log('prueba', user)
+                console.log('prueba2', user.providerData)
+                console.log('prueba3', user.accessToken)
+                console.log('prueba4', user.uid)
                 dispatch({
                     type: SIGNUP,
-                    token: user.idToken,
-                    userId: user.localId,
+                    // token: user.accessToken,
+                    userId: user.uid,
                 });
             })
             .catch(error => alert(error.message))
@@ -31,8 +35,8 @@ export const login = (email, password) => {
                 console.log('Logged in with:', user.email)
                 dispatch({
                     type: LOGIN,
-                    token: user.IdToken,
-                    userId: user.localId,
+                    // token: user.IdToken,
+                    userId: user.uid,
                 })
             })
             .catch(error => alert(error.message))

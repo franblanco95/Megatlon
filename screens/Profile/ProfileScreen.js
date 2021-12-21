@@ -4,8 +4,16 @@ import { Text, View, ScrollView, Linking, StyleSheet } from 'react-native'
 import { Avatar, Divider } from 'react-native-elements'
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../../constants/colors'
+import { useDispatch } from 'react-redux';
+import { signout } from '../../store/actions/auth.actions';
 
 export const ProfileScreen = () => {
+
+    const dispatch = useDispatch()
+
+    const handleSignOut = () => {
+        dispatch(signout())
+    }
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -65,7 +73,7 @@ export const ProfileScreen = () => {
 
                 <Pressable
                     style={styles.pressableBContainer}
-                    onPress={() => console.log("Action!")}
+                    onPress={handleSignOut}
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />

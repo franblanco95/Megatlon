@@ -1,38 +1,31 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, ImageBackground, Dimensions } from 'react-native'
 import { useDispatch } from 'react-redux'
-import Input from '../../components/Input'
 import colors from '../../constants/colors'
 import { auth, db } from '../../firebase'
-import { login, signup } from '../../store/actions/auth.actions'
+import { login } from '../../store/actions/auth.actions'
 
 const { width, height } = Dimensions.get('window')
 
 const LoginScreen = ({ navigation }) => {
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user)
-                // navigation.navigate("prueba")
-                console.log('Hay Usuario Conectado')
-        })
-        return unsubscribe
-    }, [])
+    // useEffect(() => {
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         if (user)
+    //             // navigation.navigate("prueba")
+    //             console.log('Hay Usuario Conectado')
+    //     })
+    //     return unsubscribe
+    // }, [])
 
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
-
     const dispatch = useDispatch();
-
-    const handleSingUp = () => {
-        dispatch(signup(email, password))
-    }
 
     const handleLogIn = () => {
         dispatch(login(email, password))
     }
-
 
     return (
         <KeyboardAvoidingView
@@ -55,32 +48,42 @@ const LoginScreen = ({ navigation }) => {
                     <Text style={styles.text}>Inicia sesión para ingresar a MegatlonApp</Text>
                 </View>
 
-                <View style={styles.inputContainer}>
+                <View style={styles.inputMainContainer}>
 
-                    <Input icon={require('../../assets/mail.png')} placeholder='Email' />
+                    <View style={styles.inputContainer}>
+                        <View style={styles.icon}>
+                            <Image source={require('../../assets/mail.png')} />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                        >
+                        </TextInput>
+                    </View>
 
-                    <Input icon={require('../../assets/lock.png')} placeholder='Contraseña' password />
-                    {/* <TextInput
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={text => setEmail(text)}
-                        style={styles.input}
-                    />
+                    <View style={styles.inputContainer}>
+                        <View style={styles.icon}>
+                            <Image source={require('../../assets/lock.png')} />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Contraseña"
+                            value={password}
+                            secureTextEntry
+                            onChangeText={text => setPassword(text)}
+                        >
+                        </TextInput>
+                    </View>
 
-                    <TextInput
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={text => setPassword(text)}
-                        style={styles.input}
-                        secureTextEntry
-                    /> */}
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         onPress={handleLogIn}
                         style={styles.button}
                     >
-                        <Text style={styles.buttonText}>Login</Text>
+                        <Text style={styles.buttonText}>Iniciar Sesión</Text>
                     </TouchableOpacity>
 
                     {/* <TouchableOpacity
@@ -137,7 +140,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
     },
-    inputContainer: {
+    inputMainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -195,6 +198,25 @@ const styles = StyleSheet.create({
         color: colors.white,
         textAlign: 'center',
         fontSize: 12,
-    }
+    },
+    inputContainer: {
+        width: '80%',
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height: 48,
+        marginTop: 10,
+    },
+    icon: {
+        paddingHorizontal: 20,
+    },
+    input: {
+        backgroundColor: colors.white,
+        borderBottomColor: colors.white,
+        color: '#727C8E',
+        fontSize: 14,
+    },
 
 })

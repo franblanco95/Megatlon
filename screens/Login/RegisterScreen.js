@@ -1,38 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, ImageBackground, Dimensions } from 'react-native'
 import { useDispatch } from 'react-redux'
-import Input from '../../components/Input'
 import colors from '../../constants/colors'
 import { auth, db } from '../../firebase'
-import { login, signup } from '../../store/actions/auth.actions'
+import { signup } from '../../store/actions/auth.actions'
 
 const { width, height } = Dimensions.get('window')
 
 const RegisterScreen = ({ navigation }) => {
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged(user => {
-            if (user)
-                // navigation.navigate("prueba")
-                console.log('Hay Usuario Conectado')
-        })
-        return unsubscribe
-    }, [])
+    // useEffect(() => {
+    //     const unsubscribe = auth.onAuthStateChanged(user => {
+    //         if (user)
+    //             navigation.navigate("prueba")
+    //             console.log('Hay Usuario Conectado')
+    //     })
+    //     return unsubscribe
+    // }, [])
 
+    const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
 
     const dispatch = useDispatch();
 
-    const handleSingUp = () => {
+    const handleSignUp = () => {
         dispatch(signup(email, password))
     }
-
-    const handleLogIn = () => {
-        dispatch(login(email, password))
-    }
-
 
     return (
         <KeyboardAvoidingView
@@ -55,43 +50,55 @@ const RegisterScreen = ({ navigation }) => {
                     <Text style={styles.text}>Completa el fomulario para continuar</Text>
                 </View>
 
-                <View style={styles.inputContainer}>
+                <View style={styles.inputMainContainer}>
 
-                    <Input icon={require('../../assets/lock.png')} placeholder='Nombre' />
+                    <View style={styles.inputContainer}>
+                        <View style={styles.icon}>
+                            <Image source={require('../../assets/mail.png')} />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Nombre"
+                            value={name}
+                            onChangeText={text => setName(text)}
+                        >
+                        </TextInput>
+                    </View>
 
-                    <Input icon={require('../../assets/mail.png')} placeholder='Email' />
+                    <View style={styles.inputContainer}>
+                        <View style={styles.icon}>
+                            <Image source={require('../../assets/mail.png')} />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={text => setEmail(text)}
+                        >
+                        </TextInput>
+                    </View>
 
-                    <Input icon={require('../../assets/lock.png')} placeholder='Contraseña' password />
-
-                    {/* <TextInput
-                        placeholder="Email"
-                        value={email}
-                        onChangeText={text => setEmail(text)}
-                        style={styles.input}
-                    />
-
-                    <TextInput
-                        placeholder="Password"
-                        value={password}
-                        onChangeText={text => setPassword(text)}
-                        style={styles.input}
-                        secureTextEntry
-                    /> */}
+                    <View style={styles.inputContainer}>
+                        <View style={styles.icon}>
+                            <Image source={require('../../assets/lock.png')} />
+                        </View>
+                        <TextInput
+                            style={styles.input}
+                            placeholder="Contraseña"
+                            value={password}
+                            secureTextEntry
+                            onChangeText={text => setPassword(text)}
+                        >
+                        </TextInput>
+                    </View>
                 </View>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
-                        onPress={handleLogIn}
+                        onPress={handleSignUp}
                         style={styles.button}
                     >
                         <Text style={styles.buttonText}>Crear cuenta</Text>
                     </TouchableOpacity>
-
-                    {/* <TouchableOpacity
-                        onPress={handleSingUp}
-                        style={[styles.button, styles.buttonOutline]}
-                    >
-                        <Text style={styles.buttonOutlineText}>Register</Text>
-                    </TouchableOpacity> */}
 
                 </View>
                 <View style={styles.footerContainer}>
@@ -141,7 +148,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 5,
     },
-    inputContainer: {
+    inputMainContainer: {
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -198,6 +205,25 @@ const styles = StyleSheet.create({
         width: '80%',
         color: colors.white,
         textAlign: 'center',
-    }
+    },
+    inputContainer: {
+        width: '80%',
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        height: 48,
+        marginTop: 10,
+    },
+    icon: {
+        paddingHorizontal: 20,
+    },
+    input: {
+        backgroundColor: colors.white,
+        borderBottomColor: colors.white,
+        color: '#727C8E',
+        fontSize: 14,
+    },
 
 })

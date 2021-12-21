@@ -48,7 +48,7 @@ export const DEPORTES = [
     {
         id: 8,
         name: 'MegaCross',
-        background: image7,
+        background: image8,
     },
     {
         id: 9,

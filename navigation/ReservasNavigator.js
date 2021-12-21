@@ -4,10 +4,15 @@ import { Button } from 'react-native';
 import { MegatlonLogo } from '../components/MegatlonLogo';
 import { ReservasScreen } from '../screens/Reservas/ReservasScreen';
 import { DetailScreen } from '../screens/Reservas/DetailScreen';
+import InfoIcon from '../components/InfoIcon';
+import CartIcon from '../components/CartIcon';
+import { useNavigation } from '@react-navigation/native';
 
 export const ReservasNavigator = () => {
 
     const Stack = createNativeStackNavigator();
+
+    const navigation = useNavigation();
 
     return (
         <Stack.Navigator
@@ -21,17 +26,15 @@ export const ReservasNavigator = () => {
             }}>
 
             <Stack.Screen
-                name="Home"
+                name="RESERVAS"
                 component={ReservasScreen}
                 options={{
-                    headerTitle: (props) => <MegatlonLogo {...props} />,
-                    headerRight: () => (
-                        <Button
-                            onPress={() => alert('This is a button!')}
-                            title="Info"
-                            color="red"
-                        />
+                    headerLeft: () => (
+                        <InfoIcon navigation={navigation} />
                     ),
+                    headerRight: () => (
+                        <CartIcon navigation={navigation} />
+                    )
 
                 }}
             />

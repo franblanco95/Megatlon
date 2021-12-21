@@ -1,12 +1,15 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Button } from 'react-native';
-import { MegatlonLogo } from '../components/MegatlonLogo';
 import { ProfileScreen } from '../screens/Profile/ProfileScreen';
+import InfoIcon from '../components/InfoIcon';
+import CartIcon from '../components/CartIcon';
+import { useNavigation } from '@react-navigation/native';
 
 export const ProfileNavigator = () => {
 
     const Stack = createNativeStackNavigator();
+
+    const navigation = useNavigation();
 
     return (
         <Stack.Navigator
@@ -18,17 +21,15 @@ export const ProfileNavigator = () => {
             }}>
 
             <Stack.Screen
-                name="Home"
+                name="PERFIL"
                 component={ProfileScreen}
                 options={{
-                    headerTitle: (props) => <MegatlonLogo {...props} />,
-                    headerRight: () => (
-                        <Button
-                            onPress={() => alert('This is a button!')}
-                            title="Info"
-                            color="red"
-                        />
+                    headerLeft: () => (
+                        <InfoIcon navigation={navigation} />
                     ),
+                    headerRight: () => (
+                        <CartIcon navigation={navigation} />
+                    )
 
                 }}
             />

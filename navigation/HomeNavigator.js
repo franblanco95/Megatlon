@@ -9,6 +9,7 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../constants/colors'
 import InfoIcon from '../components/InfoIcon';
 import { useNavigation } from '@react-navigation/native';
+import CartIcon from '../components/CartIcon';
 
 
 export const HomeNavigator = () => {
@@ -40,6 +41,9 @@ export const HomeNavigator = () => {
                     // ),
                     headerLeft: () => (
                         <InfoIcon navigation={navigation} />
+                    ),
+                    headerRight: () => (
+                        <CartIcon navigation={navigation} />
                     )
 
                 }}
