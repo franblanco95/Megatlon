@@ -1,12 +1,19 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity } from 'react-native'
 import colors from '../../constants/colors'
 
 const CartScreen = () => {
     return (
-        <View style={styles.container}>
-            <Text>Carrito Screen</Text>
-        </View>
+        <>
+            <ScrollView contentContainerStyle={styles.container}>
+                <View>
+                    <Text>Carrito Screen</Text>
+                </View>
+                <TouchableOpacity style={styles.orderButton}>
+                    <Text>Crear orden de compra</Text>
+                </TouchableOpacity>
+            </ScrollView>
+        </>
     )
 }
 
@@ -18,5 +25,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.primary,
+    },
+    orderButton: {
+        backgroundColor: colors.white,
+        borderRadius: 10,
+        width: '80%',
+        paddingVertical: 10,
+        paddingHorizontal: 20,
     }
 })

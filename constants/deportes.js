@@ -4,9 +4,10 @@ import image3 from '../assets/deportes/natacion.jpg'
 import image4 from '../assets/deportes/yoga.jpeg'
 import image5 from '../assets/deportes/bodypump.jpg'
 import image6 from '../assets/deportes/runningteam.jpeg'
-import image7 from '../assets/deportes/runningteam.jpeg'
+import image7 from '../assets/deportes/gap.jpg'
 import image8 from '../assets/deportes/megacross.jpg'
-import image9 from '../assets/deportes/pilates.jpg'
+import image9 from '../assets/deportes/zumba.jpg'
+import image10 from '../assets/deportes/pilates.jpg'
 
 export const DEPORTES = [
     {
@@ -53,11 +54,11 @@ export const DEPORTES = [
     {
         id: 9,
         name: 'Zumba',
-        background: image8,
+        background: image9,
     },
     {
         id: 10,
         name: 'Pilates',
-        background: image9,
+        background: image10,
     },
 ]

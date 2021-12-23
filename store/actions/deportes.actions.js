@@ -1,6 +1,6 @@
 export const SELECT_DEPORTE = 'SELECT_DEPORTE'
 
-export const selectDeporte = (estrenoId) => ({
+export const selectDeporte = (deporteId) => ({
     type: SELECT_DEPORTE,
-    estrenoId
+    deporteId
 })

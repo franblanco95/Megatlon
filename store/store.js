@@ -4,10 +4,12 @@ import thunk from 'redux-thunk'
 
 import { DeportesReducer } from './reducers/deportes.reducer';
 import { AuthReducer } from './reducers/auth.reducer';
+import { PlanesReducer } from './reducers/planes.reducer';
 
 const RootReducer = combineReducers({
     deportes: DeportesReducer,
-    auth: AuthReducer
+    auth: AuthReducer,
+    planes: PlanesReducer,
 })
 
 export default createStore(
