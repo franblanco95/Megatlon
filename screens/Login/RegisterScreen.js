@@ -1,5 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, Image, TouchableOpacity, ImageBackground, Dimensions } from 'react-native'
+import {
+    StyleSheet,
+    Text,
+    View,
+    KeyboardAvoidingView,
+    TextInput,
+    Image,
+    TouchableOpacity,
+    ImageBackground,
+    Dimensions,
+    TouchableWithoutFeedback,
+    Keyboard
+} from 'react-native'
 import { useDispatch } from 'react-redux'
 import colors from '../../constants/colors'
 import { auth, db } from '../../firebase'
@@ -30,27 +42,30 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
+        <ImageBackground
+            source={require('../../assets/megatlonbackground.jpg')}
+            style={{ width: width, height: height, justifyContent: 'space-evenly' }}
         >
-            <ImageBackground
-                source={require('../../assets/megatlonbackground.jpg')}
-                style={{ width: width, height: height, justifyContent: 'space-evenly' }}
-            >
-                <View style={styles.darkLayer}></View>
+            <View style={styles.darkLayer}></View>
 
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior='padding'
+            >
+                {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
+                {/* <View> */}
                 <View style={styles.imageContainer}>
                     <Image
                         source={require('../../assets/megatlonlogo-02.png')} />
                 </View>
 
-                <View style={styles.titleContainer}>
-                    <Text style={{ ...styles.text, ...styles.title }}>Registro</Text>
-                    <Text style={styles.text}>Completa el fomulario para continuar</Text>
-                </View>
 
                 <View style={styles.inputMainContainer}>
+
+                    <View style={styles.titleContainer}>
+                        <Text style={{ ...styles.text, ...styles.title }}>Registro</Text>
+                        <Text style={styles.text}>Completa el fomulario para continuar</Text>
+                    </View>
 
                     <View style={styles.inputContainer}>
                         <View style={styles.icon}>
@@ -91,16 +106,18 @@ const RegisterScreen = ({ navigation }) => {
                         >
                         </TextInput>
                     </View>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={handleSignUp}
-                        style={styles.button}
-                    >
-                        <Text style={styles.buttonText}>Crear cuenta</Text>
-                    </TouchableOpacity>
 
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            onPress={handleSignUp}
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Crear cuenta</Text>
+                        </TouchableOpacity>
+
+                    </View>
                 </View>
+
                 <View style={styles.footerContainer}>
                     <Text style={styles.termsText}>¿Ya estas registrado?</Text>
                     <TouchableOpacity
@@ -108,9 +125,11 @@ const RegisterScreen = ({ navigation }) => {
                         <Text style={styles.signupText}>Iniciar Sesión</Text>
                     </TouchableOpacity>
                 </View>
+                {/* </View> */}
+                {/* </TouchableWithoutFeedback> */}
 
-            </ImageBackground>
-        </KeyboardAvoidingView >
+            </KeyboardAvoidingView >
+        </ImageBackground >
     )
 }
 
@@ -119,7 +138,7 @@ export default RegisterScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between'
+        justifyContent: 'space-evenly'
     },
     darkLayer: {
         position: 'absolute',
@@ -164,7 +183,7 @@ const styles = StyleSheet.create({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 20,
     },
     button: {
         backgroundColor: colors.secondary,
@@ -200,6 +219,8 @@ const styles = StyleSheet.create({
         color: colors.secondary,
         fontWeight: 'bold',
         paddingBottom: 20,
+        marginTop: 10,
+
     },
     termsText: {
         width: '80%',

@@ -28,27 +28,29 @@ const LoginScreen = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior="padding"
+        <ImageBackground
+            source={require('../../assets/megatlonbackground.jpg')}
+            style={{ width: width, height: height, justifyContent: 'space-evenly' }}
         >
-            <ImageBackground
-                source={require('../../assets/megatlonbackground.jpg')}
-                style={{ width: width, height: height, justifyContent: 'space-evenly' }}
+            <View style={styles.darkLayer}></View>
+
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior="padding"
             >
-                <View style={styles.darkLayer}></View>
 
                 <View style={styles.imageContainer}>
                     <Image
                         source={require('../../assets/megatlonlogo-02.png')} />
                 </View>
 
-                <View style={styles.titleContainer}>
-                    <Text style={{ ...styles.text, ...styles.title }}>Bienvenido!</Text>
-                    <Text style={styles.text}>Inicia sesión para ingresar a MegatlonApp</Text>
-                </View>
 
                 <View style={styles.inputMainContainer}>
+
+                    <View style={styles.titleContainer}>
+                        <Text style={{ ...styles.text, ...styles.title }}>Bienvenido!</Text>
+                        <Text style={styles.text}>Inicia sesión para ingresar a MegatlonApp</Text>
+                    </View>
 
                     <View style={styles.inputContainer}>
                         <View style={styles.icon}>
@@ -77,23 +79,17 @@ const LoginScreen = ({ navigation }) => {
                         </TextInput>
                     </View>
 
-                </View>
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity
-                        onPress={handleLogIn}
-                        style={styles.button}
-                    >
-                        <Text style={styles.buttonText}>Iniciar Sesión</Text>
-                    </TouchableOpacity>
+                    <View style={styles.buttonContainer}>
+                        <TouchableOpacity
+                            onPress={handleLogIn}
+                            style={styles.button}
+                        >
+                            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+                        </TouchableOpacity>
 
-                    {/* <TouchableOpacity
-                        onPress={handleSingUp}
-                        style={[styles.button, styles.buttonOutline]}
-                    >
-                        <Text style={styles.buttonOutlineText}>Register</Text>
-                    </TouchableOpacity> */}
-
+                    </View>
                 </View>
+
                 <View style={styles.footerContainer}>
                     <TouchableOpacity
                         onPress={() => { navigation.navigate('Register') }}>
@@ -101,9 +97,9 @@ const LoginScreen = ({ navigation }) => {
                     </TouchableOpacity>
                     <Text style={styles.termsText}>Al registrarse, indica que ha leído y aceptado los Términos de servicio del parche</Text>
                 </View>
+            </KeyboardAvoidingView >
 
-            </ImageBackground>
-        </KeyboardAvoidingView >
+        </ImageBackground>
     )
 }
 
@@ -112,6 +108,7 @@ export default LoginScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'space-evenly',
     },
     darkLayer: {
         position: 'absolute',
@@ -150,13 +147,12 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         borderRadius: 10,
         marginTop: 5,
-
     },
     buttonContainer: {
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 40,
+        marginTop: 20,
     },
     button: {
         backgroundColor: colors.secondary,
@@ -191,13 +187,13 @@ const styles = StyleSheet.create({
     signupText: {
         color: colors.secondary,
         fontWeight: 'bold',
-        paddingBottom: 20,
     },
     termsText: {
         width: '80%',
         color: colors.white,
         textAlign: 'center',
         fontSize: 12,
+        marginTop: 20,
     },
     inputContainer: {
         width: '80%',
