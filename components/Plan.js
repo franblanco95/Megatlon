@@ -5,6 +5,7 @@ import colors from '../constants/colors'
 const Plan = ({ plan }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [actionTriggered, setActionTriggered] = useState('')
 
     return (
         <>
@@ -19,14 +20,24 @@ const Plan = ({ plan }) => {
                 </View>
 
                 <TouchableOpacity
-                    onPress={() => setModalVisible(true)}
+                    onPress={() => {
+                        setModalVisible(true)
+                        setActionTriggered('terms')
+                    }}
+
                 >
                     <Text style={styles.terms}>Términos y Condiciones</Text>
                 </TouchableOpacity>
 
                 <View>
-                    <TouchableOpacity style={styles.button}>
-                        <Text style={styles.buttonText}>Comprar</Text>
+                    <TouchableOpacity
+                        style={styles.button}
+                        onPress={() => {
+                            setModalVisible(true),
+                                setActionTriggered('cart')
+                        }}>
+
+                        <Text style={styles.buttonText}>Añadir al Carrito</Text>
                     </TouchableOpacity>
                 </View>
             </View >
@@ -37,17 +48,34 @@ const Plan = ({ plan }) => {
                 visible={modalVisible}
                 onRequestClose={() => (setModalVisible(!modalVisible))}
             >
-                <View style={styles.centeredView}>
-                    <View style={styles.modalView}>
-                        <Text style={styles.modalText}>{plan.terms}</Text>
-                        <Pressable
-                            style={[styles.buttonModal, styles.buttonClose]}
-                            onPress={() => setModalVisible(!modalVisible)}
-                        >
-                            <Text style={styles.textStyle}>Aceptar</Text>
-                        </Pressable>
+                {actionTriggered === 'terms' ?
+
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>{plan.terms}</Text>
+                            <Pressable
+                                style={[styles.buttonModal, styles.buttonClose]}
+                                onPress={() => setModalVisible(!modalVisible)}
+                            >
+                                <Text style={styles.textStyle}>Aceptar</Text>
+                            </Pressable>
+                        </View>
                     </View>
-                </View>
+                    : actionTriggered === 'cart' ?
+
+                        <View style={styles.centeredView}>
+                            <View style={styles.modalView}>
+                                <Text style={styles.modalText}>Añadido al carrito con éxito</Text>
+                                <Pressable
+                                    style={[styles.buttonModal, styles.buttonClose]}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <Text style={styles.textStyle}>Aceptar</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                        : null
+                }
             </Modal>
         </>
 

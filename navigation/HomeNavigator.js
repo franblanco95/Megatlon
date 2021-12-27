@@ -32,13 +32,6 @@ export const HomeNavigator = () => {
                 component={HomeScreen}
                 options={{
                     headerTitle: (props) => <MegatlonLogo {...props} />,
-                    // headerRight: () => (
-                    //     <Button
-                    //         onPress={() => alert('This is a button!')}
-                    //         title="Info"
-                    //         color="red"
-                    //     />
-                    // ),
                     headerLeft: () => (
                         <InfoIcon navigation={navigation} />
                     ),

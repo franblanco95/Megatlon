@@ -1,5 +1,5 @@
 import React from 'react'
-import { Pressable } from 'react-native'
+import { Pressable, TouchableOpacity } from 'react-native'
 import { Text, View, ScrollView, Linking, StyleSheet } from 'react-native'
 import { Avatar, Divider } from 'react-native-elements'
 import FeatherIcon from 'react-native-vector-icons/Feather';
@@ -23,10 +23,12 @@ export const ProfileScreen = () => {
                     size={100}
                     rounded
                     icon={{ name: 'user', type: 'font-awesome' }}
-                    onPress={() => console.log("Works!")}
+                    // onPress={() => console.log("Works!")}
                     activeOpacity={0.7}
                     containerStyle={{ backgroundColor: 'gray', marginBottom: 10 }}
-                />
+                >
+                    <Avatar.Accessory size={35} />
+                </Avatar>
 
 
                 <Text style={styles.userName}>Francisco Blanco</Text>
@@ -36,49 +38,50 @@ export const ProfileScreen = () => {
             <Divider orientation="vertical" color="red" />
 
             <View style={styles.prueba}>
-                <Pressable
+
+                <TouchableOpacity
                     style={styles.pressableBContainer}
                     onPress={() => console.log("Action!")}
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Información Personal</Text>
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable
+                <TouchableOpacity
                     style={styles.pressableBContainer}
                     onPress={() => console.log("Action!")}
                 >
                     <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Mis Reservas</Text>
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable
+                <TouchableOpacity
                     style={styles.pressableBContainer}
                     onPress={() => console.log("Action!")}
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Mi Plan</Text>
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable
+                <TouchableOpacity
                     style={styles.pressableBContainer}
                     onPress={() => console.log("Action!")}
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Configuración</Text>
-                </Pressable>
+                </TouchableOpacity>
 
-                <Pressable
+                <TouchableOpacity
                     style={styles.pressableBContainer}
                     onPress={handleSignOut}
                 >
 
                     <FeatherIcon name="user" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Cerrar Sesión</Text>
-                </Pressable>
+                </TouchableOpacity>
 
 
 
