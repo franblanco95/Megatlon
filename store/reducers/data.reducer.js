@@ -1,7 +1,7 @@
-import { READDATA } from "../actions/data.actions"
+import { CREATEDATA, READDATA } from "../actions/data.actions"
 
 const initialState = {
-    persona: null,
+    persona: [],
 }
 
 export const DataReducer = (state = initialState, action) => {
@@ -10,6 +10,10 @@ export const DataReducer = (state = initialState, action) => {
             return {
                 ...state,
                 persona: action.proba
+            }
+        case CREATEDATA:
+            return {
+                ...state,
             }
         default:
             return state

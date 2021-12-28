@@ -1,10 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Dimensions, Image } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native'
+import { useSelector } from 'react-redux'
 import colors from '../../constants/colors'
 
 const CartScreen = ({ navigation }) => {
 
-    const total = 0;
+    const total = useSelector(state => state.cart.total)
+    const planes = useSelector(state => state.cart.plans)
 
     return (
         <>
@@ -27,17 +29,19 @@ const CartScreen = ({ navigation }) => {
                     :
                     <>
                         <View>
-                            {/* <FlatList
-                                data={items}
-                                keyExtractor={item => item.id}
-                                renderItem={renderItem}
-                            /> */}
+                            {console.log(planes)}
+                            {planes.map((item => (
+                                <View key={item.id}>
+                                    <Text>{item.name}</Text>
+                                    <Text>{item.price}</Text>
+                                </View>
+                            )))}
+
                         </View>
                         <View style={styles.footer}>
 
                             <TouchableOpacity style={styles.confirmButton} onPress={() => console.log('asd')}>
                                 <Text style={styles.text}>Confirmar</Text>
-                                <Text style={styles.text}>$ {total}</Text>
                             </TouchableOpacity>
 
                         </View>

@@ -1,11 +1,21 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity, Modal, Pressable } from 'react-native'
+import { useDispatch } from 'react-redux';
 import colors from '../constants/colors'
+import { addItem } from '../store/actions/cart.actions';
 
 const Plan = ({ plan }) => {
 
+    const dispatch = useDispatch()
+
     const [modalVisible, setModalVisible] = useState(false);
     const [actionTriggered, setActionTriggered] = useState('')
+
+    const handlerAddItemCart = () => {
+        setModalVisible(true)
+        setActionTriggered('cart')
+        dispatch(addItem(plan))
+    }
 
     return (
         <>
@@ -32,10 +42,7 @@ const Plan = ({ plan }) => {
                 <View>
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={() => {
-                            setModalVisible(true),
-                                setActionTriggered('cart')
-                        }}>
+                        onPress={handlerAddItemCart}>
 
                         <Text style={styles.buttonText}>Añadir al Carrito</Text>
                     </TouchableOpacity>
