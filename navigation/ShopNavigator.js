@@ -1,19 +1,14 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Button } from 'react-native';
-import { MegatlonLogo } from '../components/MegatlonLogo';
-import { ShopScreen } from '../screens/Shop/ShopScreen';
 import InfoIcon from '../components/InfoIcon';
 import CartIcon from '../components/CartIcon';
-import { useNavigation } from '@react-navigation/native';
+import { ShopScreen } from '../screens/Shop/ShopScreen';
 import CartScreen from '../screens/Shop/CartScreen';
+import InfoScreen from '../screens/Home/InfoScreen'
 
 export const ShopNavigator = () => {
 
     const Stack = createNativeStackNavigator();
-
-    const navigation = useNavigation();
-
 
     return (
         <Stack.Navigator
@@ -29,10 +24,10 @@ export const ShopNavigator = () => {
                 component={ShopScreen}
                 options={{
                     headerLeft: () => (
-                        <InfoIcon navigation={navigation} />
+                        <InfoIcon />
                     ),
                     headerRight: () => (
-                        <CartIcon navigation={navigation} />
+                        <CartIcon />
                     )
 
                 }}
@@ -42,6 +37,12 @@ export const ShopNavigator = () => {
                 name="CARRITO"
                 component={CartScreen}
             />
+
+            {/* <Stack.Screen
+                name="Info"
+                component={InfoScreen}
+            /> */}
+
         </Stack.Navigator>
     )
 

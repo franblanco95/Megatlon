@@ -34,11 +34,11 @@ export const CartReducer = (state = initialState, action) => {
                 total: sumTotal(plans),
             }
         case REMOVE_ITEM:
-            const updateItems = state.items.filter(item => item.id !== action.itemID)
+            const updatePlans = state.plans.filter(plan => plan.id !== action.planID)
             return {
                 ...state,
-                items: updateItems,
-                total: sumTotal(updateItems)
+                plans: updatePlans,
+                total: sumTotal(updatePlans)
             }
         default:
             return state;

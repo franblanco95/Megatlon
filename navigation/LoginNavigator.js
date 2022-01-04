@@ -10,7 +10,6 @@ const LoginNavigator = () => {
     return (
         <Stack.Navigator
             screenOptions={{ headerShown: false }}>
-            {/* <Stack.Screen name="LogIn" component={LoginScreen} /> */}
             <Stack.Screen name="Login" component={LoginScreen} />
             <Stack.Screen name="Register" component={RegisterScreen} />
         </Stack.Navigator>

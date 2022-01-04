@@ -1,6 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Dimensions, Image, FlatList } from 'react-native'
+import { StyleSheet, Text, ScrollView, View, TouchableOpacity, Dimensions, Image } from 'react-native'
 import { useSelector } from 'react-redux'
+import CartItem from '../../components/CartItem'
 import colors from '../../constants/colors'
 
 const CartScreen = ({ navigation }) => {
@@ -29,12 +30,8 @@ const CartScreen = ({ navigation }) => {
                     :
                     <>
                         <View>
-                            {console.log(planes)}
                             {planes.map((item => (
-                                <View key={item.id}>
-                                    <Text>{item.name}</Text>
-                                    <Text>{item.price}</Text>
-                                </View>
+                                <CartItem key={item.id} plan={item} />
                             )))}
 
                         </View>
@@ -42,6 +39,7 @@ const CartScreen = ({ navigation }) => {
 
                             <TouchableOpacity style={styles.confirmButton} onPress={() => console.log('asd')}>
                                 <Text style={styles.text}>Confirmar</Text>
+                                <Text style={styles.text}>Total $ {total}</Text>
                             </TouchableOpacity>
 
                         </View>
@@ -58,14 +56,13 @@ export default CartScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         backgroundColor: colors.primary,
+        justifyContent: 'space-between'
     },
     emptycontainer: {
         height: Dimensions.get('window').height,
+        marginTop: 100,
         alignItems: 'center',
-        justifyContent: 'center',
     },
     cartText: {
         color: 'white',

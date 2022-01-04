@@ -2,7 +2,7 @@ import React from 'react';
 import { StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
 import store from './store/store'
-import MainNavigator from './navigation';
+import AppNavigator from './navigation';
 
 if (__DEV__) {
   import('./reactotron').then(() => console.log('Reactotron Configured'))
@@ -11,7 +11,7 @@ if (__DEV__) {
 export default function App() {
   return (
     <Provider store={store}>
-      <MainNavigator />
+      <AppNavigator />
       <StatusBar
         animated={true}
         backgroundColor="#161819"

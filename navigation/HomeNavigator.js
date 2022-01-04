@@ -1,22 +1,16 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Button } from 'react-native';
 import { MegatlonLogo } from '../components/MegatlonLogo';
+import CartIcon from '../components/CartIcon';
+import InfoIcon from '../components/InfoIcon';
 import { HomeScreen } from '../screens/Home/HomeScreen';
 import CovidScreen from '../screens/Home/CovidScreen';
 import InfoScreen from '../screens/Home/InfoScreen';
-import FeatherIcon from 'react-native-vector-icons/Feather';
-import colors from '../constants/colors'
-import InfoIcon from '../components/InfoIcon';
-import { useNavigation } from '@react-navigation/native';
-import CartIcon from '../components/CartIcon';
 
 
 export const HomeNavigator = () => {
 
     const Stack = createNativeStackNavigator();
-
-    const navigation = useNavigation();
 
     return (
         <Stack.Navigator
@@ -33,10 +27,10 @@ export const HomeNavigator = () => {
                 options={{
                     headerTitle: (props) => <MegatlonLogo {...props} />,
                     headerLeft: () => (
-                        <InfoIcon navigation={navigation} />
+                        <InfoIcon />
                     ),
                     headerRight: () => (
-                        <CartIcon navigation={navigation} />
+                        <CartIcon />
                     )
 
                 }}
@@ -47,10 +41,11 @@ export const HomeNavigator = () => {
                 component={CovidScreen}
             />
 
-            <Stack.Screen
+            {/* <Stack.Screen
                 name="Info"
                 component={InfoScreen}
-            />
+            /> */}
+
         </Stack.Navigator>
     )
 

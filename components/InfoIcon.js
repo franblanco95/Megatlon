@@ -1,8 +1,12 @@
 import React from 'react'
+import { useNavigation } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../constants/colors'
 
-const InfoIcon = ({ navigation }) => {
+const InfoIcon = () => {
+
+    const navigation = useNavigation();
+
     return (
         <FeatherIcon
             name="info"

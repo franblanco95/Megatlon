@@ -52,7 +52,7 @@ export const ProfileScreen = () => {
                     style={styles.pressableBContainer}
                     onPress={() => console.log("Action!")}
                 >
-                    <FeatherIcon name="user" size={27} color={colors.white} />
+                    <FeatherIcon name="calendar" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Mis Reservas</Text>
                 </TouchableOpacity>
 
@@ -61,7 +61,7 @@ export const ProfileScreen = () => {
                     onPress={() => console.log("Action!")}
                 >
 
-                    <FeatherIcon name="user" size={27} color={colors.white} />
+                    <FeatherIcon name="book" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Mi Plan</Text>
                 </TouchableOpacity>
 
@@ -70,7 +70,7 @@ export const ProfileScreen = () => {
                     onPress={() => console.log("Action!")}
                 >
 
-                    <FeatherIcon name="user" size={27} color={colors.white} />
+                    <FeatherIcon name="settings" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Configuración</Text>
                 </TouchableOpacity>
 
@@ -79,7 +79,7 @@ export const ProfileScreen = () => {
                     onPress={handleSignOut}
                 >
 
-                    <FeatherIcon name="user" size={27} color={colors.white} />
+                    <FeatherIcon name="log-out" size={27} color={colors.white} />
                     <Text style={styles.pressableText}>Cerrar Sesión</Text>
                 </TouchableOpacity>
 
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
     },
     pressableText: {
         color: colors.white,
-        marginLeft: 10,
+        marginLeft: 20,
         fontSize: 15,
     },
 })

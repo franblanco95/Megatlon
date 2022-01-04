@@ -1,18 +1,14 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { Button } from 'react-native';
-import { MegatlonLogo } from '../components/MegatlonLogo';
 import { ReservasScreen } from '../screens/Reservas/ReservasScreen';
 import { DetailScreen } from '../screens/Reservas/DetailScreen';
+import InfoScreen from '../screens/Home/InfoScreen'
 import InfoIcon from '../components/InfoIcon';
 import CartIcon from '../components/CartIcon';
-import { useNavigation } from '@react-navigation/native';
 
 export const ReservasNavigator = () => {
 
     const Stack = createNativeStackNavigator();
-
-    const navigation = useNavigation();
 
     return (
         <Stack.Navigator
@@ -30,10 +26,10 @@ export const ReservasNavigator = () => {
                 component={ReservasScreen}
                 options={{
                     headerLeft: () => (
-                        <InfoIcon navigation={navigation} />
+                        <InfoIcon />
                     ),
                     headerRight: () => (
-                        <CartIcon navigation={navigation} />
+                        <CartIcon />
                     )
 
                 }}
@@ -43,9 +39,13 @@ export const ReservasNavigator = () => {
                 name="Detail"
                 component={DetailScreen}
                 options={({ route }) => ({ title: route.params.name })}
-
-
             />
+
+            {/* <Stack.Screen
+                name="Info"
+                component={InfoScreen}
+            /> */}
+
         </Stack.Navigator>
     )
 

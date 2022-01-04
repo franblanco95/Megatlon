@@ -1,10 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../constants/colors'
 
 
-const CartIcon = ({ navigation }) => {
+const CartIcon = () => {
+
+    const navigation = useNavigation()
+
     return (
         <FeatherIcon
             name="shopping-cart"

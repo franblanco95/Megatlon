@@ -25,7 +25,6 @@ export const TabNavigator = () => {
                 name="Inicio"
                 component={HomeNavigator}
                 options={{
-                    tabBarBadge: '1',
                     tabBarIcon: (props) => (
                         <View style={styles.tabContainer}>
                             <MaterialCommunityIcons name="home" size={27} color={props.color} />
