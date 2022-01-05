@@ -21,7 +21,7 @@ const CartScreen = ({ navigation }) => {
                         <Text style={styles.cartSubtext}> Ve a comprar algo!</Text>
                         <TouchableOpacity
                             style={styles.button}
-                            onPress={() => navigation.goBack()}
+                            onPress={() => navigation.navigate('TIENDA')}
                         >
                             <Text style={styles.buttontext}>Tienda</Text>
 

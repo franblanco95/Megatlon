@@ -3,8 +3,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import InfoIcon from '../components/InfoIcon';
 import CartIcon from '../components/CartIcon';
 import { ShopScreen } from '../screens/Shop/ShopScreen';
-import CartScreen from '../screens/Shop/CartScreen';
-import InfoScreen from '../screens/Home/InfoScreen'
 
 export const ShopNavigator = () => {
 
@@ -32,16 +30,6 @@ export const ShopNavigator = () => {
 
                 }}
             />
-
-            <Stack.Screen
-                name="CARRITO"
-                component={CartScreen}
-            />
-
-            {/* <Stack.Screen
-                name="Info"
-                component={InfoScreen}
-            /> */}
 
         </Stack.Navigator>
     )

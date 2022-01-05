@@ -1,17 +1,10 @@
 import React from 'react'
-import { ImageBackground } from 'react-native'
-import { Text, Pressable, View, StyleSheet, TouchableOpacity, Button } from 'react-native'
-import colors from '../constants/colors'
+import { ImageBackground, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
+import colors from '../constants/colors'
 
 export const Deporte = ({ deporte, onSelected }) => {
     return (
-        // <TouchableOpacity
-        //     onPress={() => onSelected(deporte)}
-        //     style={styles.container}
-        // >
-        //     <Text style={styles.text}>{deporte.name}</Text>
-        // </TouchableOpacity>
         <ImageBackground
             source={deporte.background}
             style={styles.imageContainer}>
@@ -26,10 +19,10 @@ export const Deporte = ({ deporte, onSelected }) => {
 
                 }}
             >
+                <Text style={styles.imageTitle}>{deporte.name}</Text>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate("Covid")}
+                    onPress={() => onSelected(deporte)}
                 >
-                    <Text style={styles.imageTitle}>{deporte.name}</Text>
                     <View style={{
                         width: 145,
                         borderRadius: 20,
@@ -39,7 +32,6 @@ export const Deporte = ({ deporte, onSelected }) => {
                         <Text style={styles.imageText}>RESERVAR UN TURNO</Text>
                     </View>
                 </TouchableOpacity>
-                {/* {console.log(deporte)} */}
             </LinearGradient >
 
         </ImageBackground >

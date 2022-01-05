@@ -12,7 +12,8 @@ const InfoIcon = () => {
             name="info"
             size={27}
             color={colors.white}
-            onPress={() => navigation.navigate("Info")} />
+            // onPress={() => navigation.navigate('MainNavigator', { screen: 'Info' })} />
+            onPress={() => navigation.navigate('NOSOTROS')} />
     )
 }
 

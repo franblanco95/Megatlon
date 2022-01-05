@@ -1,7 +1,6 @@
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
-import { TabNavigator } from './TabNavigator'
-import  MainNavigator  from './MainNavigator'
+import MainNavigator from './MainNavigator'
 import LoginNavigator from './LoginNavigator';
 import { useSelector } from 'react-redux';
 

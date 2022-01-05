@@ -8,13 +8,31 @@ const Stack = createNativeStackNavigator();
 
 const MainNavigator = () => {
     return (
-        <Stack.Navigator
-            screenOptions={{
-                headerShown: false,
-            }}>
-            <Stack.Screen name="Tabs" component={TabNavigator} screenOptions={{ headerShown: false }} />
-            <Stack.Screen name="Info" component={InfoScreen} />
-            <Stack.Screen name="Cart" component={CartScreen} />
+        <Stack.Navigator>
+            <Stack.Screen
+                name="Tabs"
+                component={TabNavigator}
+                options={{ headerShown: false }} />
+
+            <Stack.Screen
+                name="NOSOTROS"
+                component={InfoScreen}
+                options={{
+                    headerStyle: { backgroundColor: '#161819' },
+                    headerTintColor: 'white',
+                    headerTitleStyle: { fontWeight: 'bold' },
+                    headerTitleAlign: 'center',
+                }} />
+
+            <Stack.Screen
+                name="CARRITO"
+                component={CartScreen}
+                options={{
+                    headerStyle: { backgroundColor: '#161819' },
+                    headerTintColor: 'white',
+                    headerTitleStyle: { fontWeight: 'bold' },
+                    headerTitleAlign: 'center',
+                }} />
         </Stack.Navigator>
     )
 }

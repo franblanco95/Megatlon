@@ -4,9 +4,7 @@ import { MegatlonLogo } from '../components/MegatlonLogo';
 import CartIcon from '../components/CartIcon';
 import InfoIcon from '../components/InfoIcon';
 import { HomeScreen } from '../screens/Home/HomeScreen';
-import CovidScreen from '../screens/Home/CovidScreen';
-import InfoScreen from '../screens/Home/InfoScreen';
-
+import { CovidScreen } from '../screens/Home/CovidScreen';
 
 export const HomeNavigator = () => {
 
@@ -40,11 +38,6 @@ export const HomeNavigator = () => {
                 name="Covid"
                 component={CovidScreen}
             />
-
-            {/* <Stack.Screen
-                name="Info"
-                component={InfoScreen}
-            /> */}
 
         </Stack.Navigator>
     )

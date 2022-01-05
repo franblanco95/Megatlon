@@ -31,10 +31,6 @@ export const ProfileNavigator = () => {
                 }}
             />
 
-            {/* <Stack.Screen
-                name="Info"
-                component={InfoScreen}
-            /> */}
         </Stack.Navigator>
     )
 

@@ -12,7 +12,7 @@ export const ReservasScreen = ({ navigation }) => {
     const deportes = useSelector(state => state.deportes.list)
 
     const handleSelectedItem = (deporte) => {
-        dispatch(selectDeporte(deporte.id));
+        dispatch(selectDeporte(deporte.id))
         navigation.navigate('Detail', {
             name: deporte.name,
         })

@@ -3,7 +3,6 @@ import { useNavigation } from '@react-navigation/native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../constants/colors'
 
-
 const CartIcon = () => {
 
     const navigation = useNavigation()
