@@ -27,6 +27,17 @@ export const TabNavigator = () => {
                 options={{
                     tabBarIcon: (props) => (
                         <View style={styles.tabContainer}>
+                            <View
+                                style={{
+                                    height: 6,
+                                    width: 30,
+                                    position: 'absolute',
+                                    backgroundColor: colors.secondary,
+                                    top: -30,
+                                    borderBottomLeftRadius: 6,
+                                    borderBottomRightRadius: 6,
+                                    
+                                }}></View>
                             <MaterialCommunityIcons name="home" size={27} color={props.color} />
                             <Text style={[styles.text, { color: props.color }]}>Inicio</Text>
                         </View>)

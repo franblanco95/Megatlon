@@ -50,7 +50,7 @@ const Plan = ({ plan }) => {
             </View >
 
             <Modal
-                animationType="slide"
+                animationType="fade"
                 transparent={true}
                 visible={modalVisible}
                 onRequestClose={() => (setModalVisible(!modalVisible))}
@@ -72,7 +72,14 @@ const Plan = ({ plan }) => {
 
                         <View style={styles.centeredView}>
                             <View style={styles.modalView}>
-                                <Text style={styles.modalText}>Añadido al carrito con éxito</Text>
+                                <Image
+                                    source={require('../assets/success.png')}
+                                    style={styles.modalImage}
+                                />
+                                <View style={{ width: '50%' }}>
+                                    <Text style={styles.modalTitle}>{plan.name}</Text>
+                                </View>
+                                <Text style={styles.modalText}>Se ha añadido al carrito!</Text>
                                 <Pressable
                                     style={[styles.buttonModal, styles.buttonClose]}
                                     onPress={() => setModalVisible(!modalVisible)}
@@ -139,13 +146,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginTop: 22
+        marginTop: 22,
+        backgroundColor: 'rgba(0,0,0,0.8)'
     },
     modalView: {
         margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 35,
+        padding: 30,
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
@@ -166,14 +174,26 @@ const styles = StyleSheet.create({
     },
     buttonClose: {
         backgroundColor: "#2196F3",
+        paddingHorizontal: 25,
     },
     textStyle: {
         color: "white",
         fontWeight: "bold",
         textAlign: "center"
     },
+    modalImage: {
+        width: 65,
+        height: 65,
+        resizeMode: 'contain',
+    },
+    modalTitle: {
+        fontWeight: 'bold',
+        fontSize: 19,
+        textAlign: 'center',
+        marginVertical: 15,
+    },
     modalText: {
+        textAlign: "center",
         marginBottom: 15,
-        textAlign: "center"
     }
 })

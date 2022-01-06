@@ -1,5 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text, StyleSheet } from 'react-native'
+import colors from '../../constants/colors'
 
 export const DetailScreen = () => {
 
@@ -20,7 +21,7 @@ export const DetailScreen = () => {
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
-            <View>
+            {/* <View>
                 <Text style={styles.bold}>Hora: 15:00</Text>
                 <Text>Duración: 60 min</Text>
                 <Text>Cupos Diponibles: 128</Text>
@@ -30,7 +31,10 @@ export const DetailScreen = () => {
                 <Text>{totalDays}</Text>
                 <Text>{today}</Text>
                 <Text>{remainingDays}</Text>
-
+            </View> */}
+            <View style={styles.horarios}>
+                <Text style={styles.text}>7:00 - 8:00</Text>
+                <Text style={styles.text}>Cupos: 128</Text>
             </View>
         </ScrollView>
     )
@@ -39,11 +43,17 @@ export const DetailScreen = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: colors.primary,
     },
     bold: {
         fontWeight: 'bold',
+    },
+    horarios: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    text: {
+        color: colors.white,
     }
 
 })

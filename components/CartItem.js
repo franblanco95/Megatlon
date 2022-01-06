@@ -11,13 +11,15 @@ const CartItem = ({ plan }) => {
 
     return (
         <View style={styles.cartContainer}>
-            <Text style={styles.cartTitle}>{plan.name}</Text>
-            <Text style={styles.cartTitle}> $ {plan.price}</Text>
+            <View>
+                <Text style={styles.cartTitle}>{plan.name}</Text>
+                <Text style={styles.cartPrice}> $ {plan.price}</Text>
+            </View>
             <TouchableOpacity>
                 <FeatherIcon
-                    name="trash"
-                    size={20}
-                    color={colors.white}
+                    name="x-circle"
+                    size={25}
+                    color='#e33e38'
                     onPress={() => dispatch(removeItem(plan.id))}
                 />
             </TouchableOpacity>
@@ -43,5 +45,11 @@ const styles = StyleSheet.create({
     },
     cartTitle: {
         color: colors.white,
+        fontWeight: 'bold',
+        fontSize: 15,
+    },
+    cartPrice: {
+        color: colors.white,
+        fontSize: 14,
     }
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import { Linking } from 'react-native'
 import { StyleSheet, View } from 'react-native'
 import { SocialIcon } from 'react-native-elements'
+import colors from '../constants/colors'
 
 const RedesSociales = () => {
     return (
@@ -9,17 +10,17 @@ const RedesSociales = () => {
             <View style={styles.redesContainer}>
                 <SocialIcon
                     type='whatsapp'
-                    iconColor='orange'
+                    iconColor={colors.secondary}
                     iconSize={24}
                     onPress={() => Linking.openURL('whatsapp://send?text=Hola&phone=+5492215758911')}
-                    style={{ backgroundColor: 'black' }}
+                    style={{ backgroundColor: colors.primary , borderColor: colors.white, borderWidth: 1}}
                 />
                 <SocialIcon
                     type='instagram'
                     iconColor='orange'
                     iconSize={24}
                     onPress={() => Linking.openURL('instagram://user?username=megatlon')}
-                    style={{ backgroundColor: 'black' }}
+                    style={{ backgroundColor: colors.primary , borderColor: colors.white, borderWidth: 1}}
 
                 />
                 <SocialIcon
@@ -27,7 +28,7 @@ const RedesSociales = () => {
                     iconColor='orange'
                     iconSize={24}
                     onPress={() => Linking.openURL('fb://profile/135030645036')}
-                    style={{ backgroundColor: 'black' }}
+                    style={{ backgroundColor: colors.primary , borderColor: colors.white, borderWidth: 1}}
                 />
             </View>
         </>

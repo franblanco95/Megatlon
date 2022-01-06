@@ -29,7 +29,7 @@ const CartScreen = ({ navigation }) => {
                     </View>
                     :
                     <>
-                        <View>
+                        <View style={{ paddingVertical: 20, }}>
                             {planes.map((item => (
                                 <CartItem key={item.id} plan={item} />
                             )))}
@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
         padding: 12,
         borderTopColor: '#ccc',
         borderTopWidth: 1,
-
+        marginBottom: 20,
     },
     confirmButton: {
         backgroundColor: '#e33e38',

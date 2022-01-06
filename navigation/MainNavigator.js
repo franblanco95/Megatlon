@@ -20,7 +20,7 @@ const MainNavigator = () => {
                 options={{
                     headerStyle: { backgroundColor: '#161819' },
                     headerTintColor: 'white',
-                    headerTitleStyle: { fontWeight: 'bold' },
+                    headerTitleStyle: { fontWeight: 'bold'},
                     headerTitleAlign: 'center',
                 }} />
 
