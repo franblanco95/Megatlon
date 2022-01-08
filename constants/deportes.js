@@ -14,6 +14,10 @@ export const DEPORTES = [
         id: 1,
         name: 'Musculación',
         background: image1,
+        turnos:{
+            
+        }
+        
 
     },
     {
