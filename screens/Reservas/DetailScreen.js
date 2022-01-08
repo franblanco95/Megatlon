@@ -2,79 +2,92 @@ import React, { useState } from 'react'
 import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { useSelector } from 'react-redux'
 import colors from '../../constants/colors'
+import moment from 'moment'
 
 export const DetailScreen = () => {
 
-    const [selected, setSelected] = useState(false)
+    const [hourSelected, setHourSelected] = useState()
+    const [daySelected, setDaySelected] = useState()
 
     const deporteId = useSelector(state => state.deportes.selectedID)
     const deporte = useSelector(state => state.deportes.list.find(item => item.id === deporteId))
 
-    // const selectedItem = (value) => {
-    //     setSelected(value);
-    // }
+    const selectedHour = (value) => {
+        setHourSelected(value);
+    }
+    const selectedDay = (value) => {
+        setDaySelected(value);
+    }
 
-    const dayNames = ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado']
-    const monthNames = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC']
+    moment.locale('es', {
+        months: 'Enero_Febrero_Marzo_Abril_Mayo_Junio_Julio_Agosto_Septiembre_Octubre_Noviembre_Diciembre'.split('_'),
+        monthsShort: 'Enero._Feb._Mar_Abr._May_Jun_Jul._Ago_Sept._Oct._Nov._Dec.'.split('_'),
+        weekdays: 'Domingo_Lunes_Martes_Miercoles_Jueves_Viernes_Sabado'.split('_'),
+        weekdaysShort: 'Dom._Lun._Mar._Mier._Jue._Vier._Sab.'.split('_'),
+        weekdaysMin: 'Do_Lu_Ma_Mi_Ju_Vi_Sa'.split('_')
+    }
+    );
 
-    const dia = dayNames[new Date().getDay()];
-    const date = new Date().getDate();
-    const month = monthNames[new Date().getMonth()];
+    var enumerateDaysBetweenDates = function (startDate, endDate) {
+        var now = startDate,
+            dates = [];
 
-    const now = new Date()
-    const totalDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
-    const today = now.getDate();
-    const remainingDays = totalDays - today;
+        while (now.isSameOrBefore(endDate)) {
+            const mes = now.format('DD')
+            const dia = now.format('ddd')
 
-    // const today = date.getDate()
-    // const totalDays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+            dates.push({
+                mes: mes,
+                dia: dia
+            });
+            now.add(1, 'days');
+        }
+        return dates;
+    };
+
+    var fromDate = moment();
+    var toDate = moment().add(4, 'days');
+    var results = enumerateDaysBetweenDates(fromDate, toDate);
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            {console.log(deporte)}
+        <ScrollView
+            contentInsetAdjustmentBehavior='automatic'
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.container}>
 
             <Text style={styles.dayTitle}>Selecciona tu reserva</Text>
+            <ScrollView horizontal style={styles.daysContainer}>
+                {results.map((item, index) => (
 
-            <View style={styles.daysContainer}>
-                <View style={styles.day}>
-                    <Text style={styles.dayText}>{month}</Text>
-                    <Text style={[styles.dayText, styles.textBold]}>{date}</Text>
-                </View>
-                <View style={styles.day}>
-                    <Text style={styles.dayText}>{month}</Text>
-                    <Text style={[styles.dayText, styles.textBold]}>{date}</Text>
-                </View>
-                <View style={styles.day}>
-                    <Text style={styles.dayText}>{month}</Text>
-                    <Text style={[styles.dayText, styles.textBold]}>{date}</Text>
-                </View>
-                <View style={styles.day}>
-                    <Text style={styles.dayText}>{month}</Text>
-                    <Text style={[styles.dayText, styles.textBold]}>{date}</Text>
-                </View>
-                <View style={styles.day}>
-                    <Text style={styles.dayText}>{month}</Text>
-                    <Text style={[styles.dayText, styles.textBold]}>{date}</Text>
-                </View>
-            </View>
-            {/* <View>
-                <Text style={styles.textBold}>Hora: 15:00</Text>
-                <Text>Duración: 60 min</Text>
-                <Text>Cupos Diponibles: 128</Text>
-                <Text>{date}/ {dia}/{month}</Text>
+                    <TouchableOpacity
+                        style={index === daySelected ? styles.daySelected : styles.day}
+                        key={index}
+                        onPress={() => selectedDay(index)}>
 
-                <Text>{now.toUTCString()}</Text>
-                <Text>{totalDays}</Text>
-                <Text>{today}</Text>
-                <Text>{remainingDays}</Text>
-            </View> */}
+                        <Text style={styles.dayText}>{item.dia}</Text>
+                        <Text style={[styles.dayText, styles.textBold]}>{item.mes}</Text>
+                    </TouchableOpacity>
+                ))}
+            </ScrollView>
+
             <Text style={styles.dayTitle}>Horarios</Text>
 
             <View style={styles.horariosContainer}>
-                <TouchableOpacity style={styles.horarios} onPress={() => setSelected(true)}>
-                    <Text style={selected === false ? styles.text : styles.textSelected}>7:00 - 8:00</Text>
-                    <Text style={styles.text}>Cupos: 128</Text>
-                </TouchableOpacity>
+
+                {deporte.turnos.map((turno, index) => (
+
+                    <TouchableOpacity
+                        style={index === hourSelected ? styles.horariosSelected : styles.horarios}
+                        key={index}
+                        onPress={() => selectedHour(index)}>
+
+                        <Text style={styles.text}>{turno}</Text>
+                        <Text style={styles.text}>Cupos: 128</Text>
+                    </TouchableOpacity>
+
+
+                ))}
+
             </View>
         </ScrollView>
     )
@@ -82,7 +95,6 @@ export const DetailScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: colors.primary,
         paddingHorizontal: 10,
     },
@@ -91,7 +103,6 @@ const styles = StyleSheet.create({
     },
     daysContainer: {
         flexDirection: 'row',
-        justifyContent: 'space-around',
     },
     dayTitle: {
         fontWeight: 'bold',
@@ -109,10 +120,19 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         marginHorizontal: 10,
     },
+    daySelected: {
+        alignItems: 'center',
+        borderWidth: 2,
+        borderColor: colors.secondary,
+        borderRadius: 12,
+        paddingHorizontal: 18,
+        paddingVertical: 15,
+        marginHorizontal: 10,
+
+    },
     dayText: {
         color: colors.white,
-    },
-    horariosContainer: {
+        textTransform: 'uppercase',
     },
     horarios: {
         borderWidth: 1,
@@ -122,15 +142,19 @@ const styles = StyleSheet.create({
         paddingVertical: 15,
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginBottom: 10,
     },
     horariosSelected: {
-        backgroundColor: colors.secondary,
+        borderWidth: 2,
+        borderColor: colors.secondary,
+        borderRadius: 8,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 10,
     },
     text: {
         color: colors.white,
     },
-    textSelected: {
-        color: colors.secondary,
-    },
-
 })

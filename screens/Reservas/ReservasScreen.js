@@ -18,24 +18,22 @@ export const ReservasScreen = ({ navigation }) => {
         })
     }
     return (
-        <>
-            <ScrollView
-                style={styles.reservasContainer}
-                contentInsetAdjustmentBehavior='automatic'
-                showsVerticalScrollIndicator={false}>
+        <ScrollView
+            style={styles.reservasContainer}
+            contentInsetAdjustmentBehavior='automatic'
+            showsVerticalScrollIndicator={false}>
 
 
-                <View style={styles.deportes}>
+            <View>
 
-                    {deportes.map((deportes => (
-                        <View key={deportes.id}>
-                            <Deporte deporte={deportes} onSelected={handleSelectedItem} />
-                        </View>)))
-                    }
+                {deportes.map((deportes => (
+                    <View key={deportes.id}>
+                        <Deporte deporte={deportes} onSelected={handleSelectedItem} />
+                    </View>)))
+                }
 
-                </View>
-            </ScrollView>
-        </>
+            </View>
+        </ScrollView>
 
     )
 }
@@ -44,13 +42,6 @@ const styles = StyleSheet.create({
     reservasContainer: {
         flex: 1,
         backgroundColor: colors.primary,
-    },
-    deportes: {
-        // marginTop: 20,
-        // justifyContent: 'center',
-        // alignItems: 'center',
-
     }
-
 })
 
