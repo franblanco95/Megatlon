@@ -3,6 +3,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ProfileScreen } from '../screens/Profile/ProfileScreen';
 import InfoIcon from '../components/InfoIcon';
 import CartIcon from '../components/CartIcon';
+import TurnosScreen from '../screens/Profile/TurnosScreen';
+import QrScreen from '../screens/Profile/QrScreen';
 
 export const ProfileNavigator = () => {
 
@@ -30,7 +32,14 @@ export const ProfileNavigator = () => {
 
                 }}
             />
-
+            <Stack.Screen
+                name="Turnos"
+                component={TurnosScreen}
+            />
+            <Stack.Screen
+                name="Qr"
+                component={QrScreen}
+            />
         </Stack.Navigator>
     )
 

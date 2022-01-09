@@ -1,13 +1,14 @@
 import React from 'react'
-import { Pressable, TouchableOpacity } from 'react-native'
-import { Text, View, ScrollView, Linking, StyleSheet } from 'react-native'
+import { TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { Avatar, Divider } from 'react-native-elements'
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../../constants/colors'
 import { useDispatch } from 'react-redux';
 import { signout } from '../../store/actions/auth.actions';
+import { auth } from "../../firebase";
 
-export const ProfileScreen = () => {
+export const ProfileScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
@@ -16,7 +17,7 @@ export const ProfileScreen = () => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.profileContainer}>
             <View style={styles.header}>
 
                 <Avatar
@@ -24,74 +25,73 @@ export const ProfileScreen = () => {
                     rounded
                     icon={{ name: 'user', type: 'font-awesome' }}
                     // onPress={() => console.log("Works!")}
-                    activeOpacity={0.7}
                     containerStyle={{ backgroundColor: 'gray', marginBottom: 10 }}
                 >
                     <Avatar.Accessory size={35} />
                 </Avatar>
 
 
-                <Text style={styles.userName}>Francisco Blanco</Text>
+                <Text style={styles.userName}>{auth.currentUser?.displayName}</Text>
 
             </View>
 
             <Divider orientation="vertical" color="red" />
 
-            <View style={styles.prueba}>
+            <View style={styles.buttonContainer}>
 
                 <TouchableOpacity
-                    style={styles.pressableBContainer}
+                    style={styles.button}
                     onPress={() => console.log("Action!")}
                 >
 
-                    <FeatherIcon name="user" size={27} color={colors.white} />
-                    <Text style={styles.pressableText}>Información Personal</Text>
+                    <FeatherIcon name="user" size={24} color={colors.white} />
+                    <Text style={styles.buttonText}>Información Personal</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={styles.pressableBContainer}
-                    onPress={() => console.log("Action!")}
+                    style={styles.button}
+                    onPress={() => navigation.navigate('Turnos')}
                 >
-                    <FeatherIcon name="calendar" size={27} color={colors.white} />
-                    <Text style={styles.pressableText}>Mis Reservas</Text>
+                    <FeatherIcon name="calendar" size={24} color={colors.white} />
+                    <Text style={styles.buttonText}>Mis Turnos</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={styles.pressableBContainer}
-                    onPress={() => console.log("Action!")}
-                >
-
-                    <FeatherIcon name="book" size={27} color={colors.white} />
-                    <Text style={styles.pressableText}>Mi Plan</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity
-                    style={styles.pressableBContainer}
+                    style={styles.button}
                     onPress={() => console.log("Action!")}
                 >
 
-                    <FeatherIcon name="settings" size={27} color={colors.white} />
-                    <Text style={styles.pressableText}>Configuración</Text>
+                    <FeatherIcon name="book" size={24} color={colors.white} />
+                    <Text style={styles.buttonText}>Mi Plan</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    style={styles.pressableBContainer}
+                    style={styles.button}
+                    onPress={() => console.log("Action!")}
+                >
+
+                    <FeatherIcon name="settings" size={24} color={colors.white} />
+                    <Text style={styles.buttonText}>Configuración</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={styles.button}
                     onPress={handleSignOut}
                 >
 
-                    <FeatherIcon name="log-out" size={27} color={colors.white} />
-                    <Text style={styles.pressableText}>Cerrar Sesión</Text>
+                    <FeatherIcon name="log-out" size={24} color={colors.white} />
+                    <Text style={styles.buttonText}>Cerrar Sesión</Text>
                 </TouchableOpacity>
 
 
 
             </View>
-        </ScrollView>
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
-    container: {
+    profileContainer: {
         flex: 1,
         backgroundColor: colors.primary,
     },
@@ -106,24 +106,25 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
 
-    pressableBContainer: {
+    button: {
         flexDirection: 'row',
-        backgroundColor: colors.secondary,
+        // backgroundColor: colors.secondary,
+        borderWidth: 1,
+        borderColor: colors.secondary,
         alignItems: 'center',
         paddingHorizontal: 15,
-        paddingVertical: 10,
+        paddingVertical: 13,
         borderRadius: 5,
-        width: '70%',
-        // justifyContent: 'space-between',
-        marginBottom: 10,
+        width: '75%',
+        marginBottom: 15,
 
     },
-    prueba: {
-        width: '100%',
-        marginVertical: 10,
+    buttonContainer: {
+        marginTop: 30,
         alignItems: 'center',
+
     },
-    pressableText: {
+    buttonText: {
         color: colors.white,
         marginLeft: 20,
         fontSize: 15,

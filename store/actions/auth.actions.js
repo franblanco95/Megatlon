@@ -4,24 +4,30 @@ export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'SIGNUP';
 export const SIGNOUT = 'SIGNOUT';
 
-export const signup = (email, password) => {
+export const signup = (email, password, name) => {
     return async dispatch => {
         auth
             .createUserWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
-                console.log('Registered with:', user)
-                console.log('prueba', user)
-                console.log('prueba2', user.providerData)
-                console.log('prueba3', user.accessToken)
-                console.log('prueba4', user.uid)
+                user.getIdToken().then(idToken => {
+                    console.log(idToken);
+
+                })
+
                 dispatch({
                     type: SIGNUP,
                     // token: user.accessToken,
                     userId: user.uid,
                 });
+                user.updateProfile({
+                    displayName: name,
+                }).then(function () {
+                    var displayName = user.displayName;
+                })
             })
             .catch(error => alert(error.message))
+
     }
 }
 

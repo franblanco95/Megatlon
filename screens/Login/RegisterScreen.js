@@ -38,7 +38,7 @@ const RegisterScreen = ({ navigation }) => {
     const dispatch = useDispatch();
 
     const handleSignUp = () => {
-        dispatch(signup(email, password))
+        dispatch(signup(email, password, name))
     }
 
     return (
