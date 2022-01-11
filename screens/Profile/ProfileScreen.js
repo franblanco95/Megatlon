@@ -4,7 +4,7 @@ import { Text, View, StyleSheet } from 'react-native'
 import { Avatar, Divider } from 'react-native-elements'
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import colors from '../../constants/colors'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signout } from '../../store/actions/auth.actions';
 import { auth } from "../../firebase";
 

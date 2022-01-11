@@ -1,4 +1,5 @@
 import { auth } from "../../firebase";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const SIGNUP = 'SIGNUP';
 export const LOGIN = 'SIGNUP';
@@ -11,15 +12,17 @@ export const signup = (email, password, name) => {
             .then(userCredentials => {
                 const user = userCredentials.user;
                 user.getIdToken().then(idToken => {
-                    console.log(idToken);
 
+                    AsyncStorage.setItem('@token', idToken);
+                    AsyncStorage.setItem('@userId', user.uid);
+
+                    dispatch({
+                        type: SIGNUP,
+                        token: idToken,
+                        userId: user.uid,
+                    });
                 })
 
-                dispatch({
-                    type: SIGNUP,
-                    // token: user.accessToken,
-                    userId: user.uid,
-                });
                 user.updateProfile({
                     displayName: name,
                 }).then(function () {
@@ -27,7 +30,6 @@ export const signup = (email, password, name) => {
                 })
             })
             .catch(error => alert(error.message))
-
     }
 }
 
@@ -38,28 +40,57 @@ export const login = (email, password) => {
             .signInWithEmailAndPassword(email, password)
             .then(userCredentials => {
                 const user = userCredentials.user;
-                console.log('Logged in with:', user.email)
-                dispatch({
-                    type: LOGIN,
-                    // token: user.IdToken,
-                    userId: user.uid,
+                user.getIdToken().then(idToken => {
+
+                    AsyncStorage.setItem('@token', idToken);
+                    AsyncStorage.setItem('@userId', user.uid);
+
+                    dispatch({
+                        type: LOGIN,
+                        token: idToken,
+                        userId: user.uid,
+                    });
                 })
             })
             .catch(error => alert(error.message))
+
+
     }
 }
 
 export const signout = () => {
     return async dispatch => {
+
+        const token = await AsyncStorage.removeItem('@token')
+        const userId = await AsyncStorage.removeItem('@userId');
+
         auth
             .signOut()
             .then(() => {
                 dispatch({
                     type: SIGNOUT,
+                    token,
+                    userId,
 
                 })
 
             })
             .catch(error => alert(error.message))
+    }
+}
+
+export const initAuthentication = () => {
+    return async dispatch => {
+
+        const token = await AsyncStorage.getItem('@token')
+        const userId = await AsyncStorage.getItem('@userId')
+
+        if (token !== null && userId !== null) {
+            dispatch({
+                type: SIGNUP,
+                token,
+                userId,
+            })
+        }
     }
 }
