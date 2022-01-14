@@ -3,6 +3,7 @@ import { SELECT_DEPORTE } from '../actions/deportes.actions'
 
 const initialState = {
     list: DEPORTES,
+    deporteFiltrado: [],
     selectedID: null,
 }
 
@@ -11,7 +12,7 @@ export const DeportesReducer = (state = initialState, action) => {
         case SELECT_DEPORTE:
             return {
                 ...state,
-                selectedID: action.deporteId,
+                deporteFiltrado: state.list.find(item => item.id === action.deporteId),
             }
         default:
             return state;

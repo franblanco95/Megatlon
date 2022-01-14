@@ -1,8 +1,10 @@
 import React from 'react'
-import { ScrollView } from 'react-native'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView, Dimensions } from 'react-native'
 import Covid from '../../components/Covid'
 import colors from '../../constants/colors'
+
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 export const HomeScreen = ({ navigation }) => {
     return (

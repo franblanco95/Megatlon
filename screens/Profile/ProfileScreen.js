@@ -41,7 +41,7 @@ export const ProfileScreen = ({ navigation }) => {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => console.log("Action!")}
+                    onPress={() => navigation.navigate('Info Personal')}
                 >
 
                     <FeatherIcon name="user" size={24} color={colors.white} />

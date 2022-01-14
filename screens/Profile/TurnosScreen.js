@@ -1,24 +1,38 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
+import { readTurno } from '../../store/actions/turnos.actions'
 import colors from '../../constants/colors'
 
 const TurnosScreen = ({ navigation }) => {
 
-    return (
-        <View style={styles.turnosContainer}>
+    const dispatch = useDispatch()
 
-            <View style={styles.turno}>
-                <View>
-                    <Text style={styles.turnosText}>Musculación</Text>
-                    <Text style={styles.turnosText}>Hora: 08:00 a 09:00</Text>
+    const turnos = useSelector(state => state.turnos.filteredTurnos)
+
+    useEffect(() => {
+        dispatch(readTurno());
+    }, [])
+
+    return (
+        <View style={styles.turnosMainContainer}>
+
+            {turnos.map((turno => (
+                <View style={styles.turnoContainer}>
+                    <View>
+                        <Text style={styles.turnosText}>{turno.deporte}</Text>
+                        <Text style={styles.turnosText}>Dia: {turno.dia}</Text>
+                        <Text style={styles.turnosText}>Hora: {turno.hora}</Text>
+                    </View>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Qr')}
+                        style={styles.buttonContainer}
+                    >
+                        <Text style={styles.buttonText}>Mostrar Código QR</Text>
+                    </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Qr')}
-                    style={styles.buttonContainer}
-                >
-                    <Text style={styles.buttonText}>Mostrar Código QR</Text>
-                </TouchableOpacity>
-            </View>
+
+            )))}
         </View >
     )
 }
@@ -26,18 +40,18 @@ const TurnosScreen = ({ navigation }) => {
 export default TurnosScreen
 
 const styles = StyleSheet.create({
-    turnosContainer: {
+    turnosMainContainer: {
         flex: 1,
         paddingHorizontal: 10,
         backgroundColor: colors.primary,
     },
-    turno: {
+    turnoContainer: {
         flexDirection: 'row',
         backgroundColor: 'gray',
         justifyContent: 'space-between',
         padding: 10,
         borderRadius: 10,
-
+        marginBottom: 10,
     },
     turnosText: {
         color: colors.white,

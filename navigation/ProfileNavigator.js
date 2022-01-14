@@ -5,6 +5,7 @@ import InfoIcon from '../components/InfoIcon';
 import CartIcon from '../components/CartIcon';
 import TurnosScreen from '../screens/Profile/TurnosScreen';
 import QrScreen from '../screens/Profile/QrScreen';
+import IPersonalScreen from '../screens/Profile/IPersonalScreen';
 
 export const ProfileNavigator = () => {
 
@@ -31,6 +32,10 @@ export const ProfileNavigator = () => {
                     )
 
                 }}
+            />
+            <Stack.Screen
+                name="Info Personal"
+                component={IPersonalScreen}
             />
             <Stack.Screen
                 name="Turnos"

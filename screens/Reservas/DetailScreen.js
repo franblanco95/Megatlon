@@ -1,22 +1,33 @@
 import React, { useState } from 'react'
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { useSelector } from 'react-redux'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import { useSelector, useDispatch } from 'react-redux'
+import { createTurno } from '../../store/actions/turnos.actions'
 import colors from '../../constants/colors'
 import moment from 'moment'
 
 export const DetailScreen = () => {
 
+    const dispatch = useDispatch()
+
+    const [hourIndex, setHourIndex] = useState()
+    const [dayIndex, setDayIndex] = useState()
+
     const [hourSelected, setHourSelected] = useState()
     const [daySelected, setDaySelected] = useState()
 
-    const deporteId = useSelector(state => state.deportes.selectedID)
-    const deporte = useSelector(state => state.deportes.list.find(item => item.id === deporteId))
+    const deporte = useSelector(state => state.deportes.deporteFiltrado)
 
-    const selectedHour = (value) => {
-        setHourSelected(value);
+    const selectedHour = (index, hour) => {
+        setHourSelected(hour);
+        setHourIndex(index);
     }
-    const selectedDay = (value) => {
-        setDaySelected(value);
+    const selectedDay = (index, day) => {
+        setDaySelected(day);
+        setDayIndex(index);
+    }
+
+    const handleOrder = () => {
+        dispatch(createTurno(hourSelected, daySelected, deporte.name))
     }
 
     moment.locale('es', {
@@ -60,9 +71,9 @@ export const DetailScreen = () => {
                 {results.map((item, index) => (
 
                     <TouchableOpacity
-                        style={index === daySelected ? styles.daySelected : styles.day}
+                        style={index === dayIndex ? styles.daySelected : styles.day}
                         key={index}
-                        onPress={() => selectedDay(index)}>
+                        onPress={() => selectedDay(index, item.dia)}>
 
                         <Text style={styles.dayText}>{item.dia}</Text>
                         <Text style={[styles.dayText, styles.textBold]}>{item.mes}</Text>
@@ -77,9 +88,9 @@ export const DetailScreen = () => {
                 {deporte.turnos.map((turno, index) => (
 
                     <TouchableOpacity
-                        style={index === hourSelected ? styles.horariosSelected : styles.horarios}
+                        style={index === hourIndex ? styles.horariosSelected : styles.horarios}
                         key={index}
-                        onPress={() => selectedHour(index)}>
+                        onPress={() => selectedHour(index, turno)}>
 
                         <Text style={styles.text}>{turno}</Text>
                         <Text style={styles.text}>Cupos: 128</Text>
@@ -87,7 +98,11 @@ export const DetailScreen = () => {
 
 
                 ))}
+                <Button
+                    title='Reservar Turno'
+                    onPress={() => handleOrder(hourSelected, daySelected, deporte.name)}
 
+                />
             </View>
         </ScrollView>
     )
