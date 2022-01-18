@@ -14,6 +14,7 @@ export const DEPORTES = [
         id: 1,
         name: 'Musculación',
         background: image1,
+        icon: 'dumbbell',
         turnos: [
             "7:00 - 8:00",
             "8:00 - 9:00",
@@ -36,6 +37,7 @@ export const DEPORTES = [
         id: 2,
         name: 'Spinning',
         background: image2,
+        icon: 'bike',
         turnos: [
             "7:00 - 8:00",
             "8:00 - 9:00",
@@ -58,6 +60,7 @@ export const DEPORTES = [
         id: 3,
         name: 'Pileta',
         background: image3,
+        icon: 'swim',
         turnos: [
             "7:00 - 8:00",
             "8:00 - 9:00",
@@ -80,35 +83,42 @@ export const DEPORTES = [
         id: 4,
         name: 'Yoga',
         background: image4,
+        icon: 'yoga',
     },
     {
         id: 5,
         name: 'BodyPump',
         background: image5,
+        icon: 'weight-lifter',
     },
     {
         id: 6,
         name: 'Running Team',
         background: image6,
+        icon: 'run',
     },
     {
         id: 7,
         name: 'GAP',
         background: image7,
+        icon: 'human-baby-changing-table',
     },
     {
         id: 8,
         name: 'MegaCross',
         background: image8,
+        icon: 'kabaddi',
     },
     {
         id: 9,
         name: 'Zumba',
         background: image9,
+        icon: 'human-handsup',
     },
     {
         id: 10,
         name: 'Pilates',
         background: image10,
+        icon: 'ski-water',
     },
 ]
