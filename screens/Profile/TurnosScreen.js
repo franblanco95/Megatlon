@@ -17,8 +17,8 @@ const TurnosScreen = ({ navigation }) => {
     return (
         <View style={styles.turnosMainContainer}>
 
-            {turnos.map((turno => (
-                <View style={styles.turnoContainer}>
+            {turnos.map((turno, index) => (
+                <View key={index} style={styles.turnoContainer}>
                     <View>
                         <Text style={styles.turnosText}>{turno.deporte}</Text>
                         <Text style={styles.turnosText}>Dia: {turno.dia}</Text>
@@ -32,7 +32,7 @@ const TurnosScreen = ({ navigation }) => {
                     </TouchableOpacity>
                 </View>
 
-            )))}
+            ))}
         </View >
     )
 }

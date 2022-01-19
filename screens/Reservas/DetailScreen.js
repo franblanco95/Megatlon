@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
-import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { ScrollView, View, Text, StyleSheet, TouchableOpacity, Button, Modal, Pressable } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { createTurno } from '../../store/actions/turnos.actions'
 import colors from '../../constants/colors'
 import moment from 'moment'
 
-export const DetailScreen = () => {
+export const DetailScreen = ({ navigation }) => {
 
     const dispatch = useDispatch()
 
     const [hourIndex, setHourIndex] = useState()
     const [dayIndex, setDayIndex] = useState()
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     const [hourSelected, setHourSelected] = useState()
     const [daySelected, setDaySelected] = useState()
@@ -20,14 +22,26 @@ export const DetailScreen = () => {
     const selectedHour = (index, hour) => {
         setHourSelected(hour);
         setHourIndex(index);
+
     }
     const selectedDay = (index, day) => {
         setDaySelected(day);
         setDayIndex(index);
     }
 
+    useEffect(() => {
+        handleOpenModal();
+
+    }, [daySelected, hourSelected])
+
     const handleOrder = () => {
         dispatch(createTurno(hourSelected, daySelected, deporte.name))
+        setModalVisible(!modalVisible)
+        navigation.goBack()
+    }
+
+    const handleOpenModal = () => {
+        setModalVisible(hourSelected !== undefined && daySelected !== undefined)
     }
 
     moment.locale('es', {
@@ -98,11 +112,41 @@ export const DetailScreen = () => {
 
 
                 ))}
-                <Button
-                    title='Reservar Turno'
-                    onPress={() => handleOrder(hourSelected, daySelected, deporte.name)}
+            </View>
 
-                />
+
+            <View style={styles.centeredView}>
+                <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={modalVisible}
+                    onRequestClose={() => {
+                        Alert.alert("Modal has been closed.");
+                        setModalVisible(!modalVisible);
+                    }}
+                >
+                    <View style={styles.centeredView}>
+                        <View style={styles.modalView}>
+                            <Text style={styles.modalText}>Estas seguro de querer reservar un turno de {deporte.name} para el {daySelected} {hourSelected} ?</Text>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => setModalVisible(!modalVisible)}
+                                >
+                                    <Text style={styles.textStyle}>Cancelar</Text>
+                                </Pressable>
+
+                                <Pressable
+                                    style={[styles.button, styles.buttonClose]}
+                                    onPress={() => handleOrder(hourSelected, daySelected, deporte.name)}
+                                >
+                                    <Text style={styles.textStyle}>Aceptar</Text>
+                                </Pressable>
+                            </View>
+                        </View>
+                    </View>
+                </Modal>
+
             </View>
         </ScrollView>
     )
@@ -172,4 +216,48 @@ const styles = StyleSheet.create({
     text: {
         color: colors.white,
     },
+
+    centeredView: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: 22
+    },
+    modalView: {
+        margin: 20,
+        backgroundColor: "white",
+        borderRadius: 20,
+        padding: 35,
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    button: {
+        borderRadius: 20,
+        padding: 10,
+        elevation: 2,
+        marginHorizontal: 15
+    },
+    buttonOpen: {
+        backgroundColor: "#F194FF",
+    },
+    buttonClose: {
+        backgroundColor: "#2196F3",
+    },
+    textStyle: {
+        color: "white",
+        fontWeight: "bold",
+        textAlign: "center"
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: "center"
+    }
+
 })

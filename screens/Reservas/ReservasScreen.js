@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView, Picker } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import { Deporte } from '../../components/Deporte'
 import { useDispatch, useSelector } from 'react-redux'
 import { selectDeporte } from '../../store/actions/deportes.actions'
 import colors from '../../constants/colors'
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs(['Deprecation warning: use moment.updateLocale'])
 
 export const ReservasScreen = ({ navigation }) => {
 
